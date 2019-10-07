@@ -1,31 +1,29 @@
 package com.jxc.app.services;
 
-import com.jxc.app.exceptions.UserNotFoundException;
 import com.jxc.app.models.User;
-import com.jxc.app.repositories.UserRepository;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+public interface UserService {
 
-@Service
-public class UserService {
+    /**
+     * Method to save a {@link User}, only here for testing purpose
+     * @param user The {@link User} to save
+     * @return The user saved
+     */
+    User save(User user);
 
-    @Autowired
-    UserRepository userRepository;
+    /**
+     * Method to find a {@link User} by id
+     * @param id id of the {@link User}
+     * @return the {@link User } if he exist, throw an {@link com.jxc.app.exceptions.UserNotFoundException} otherwise
+     */
+    User findUserById(String id);
 
-    public List<User> getAllUsers(){
-        List<User> userList = this.userRepository.findAll();
-        return userList;
-    }
+    /**
+     * Method to find all {@link User}
+     * @return a list that contains all {@link User}
+     */
+    List<User> findAllUsers();
 
-    public User getUserById(String id){
-        final Optional<User> optionalUser = this.userRepository.findById(id);
-        if (!optionalUser.isPresent()){
-            throw new UserNotFoundException("User with id : "+ id + " does not exist.");
-        }
-        return optionalUser.get();
-    }
 }
