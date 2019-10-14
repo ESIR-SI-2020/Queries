@@ -2,6 +2,7 @@ package com.jxc.app.controllers;
 
 import com.jxc.app.exceptions.UserNotFoundException;
 import com.jxc.app.models.User;
+import com.jxc.app.models.UserInfosDTO;
 import com.jxc.app.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,15 +29,29 @@ public class UserController {
     }
 
     /**
-     * Method to find a user by id
-     * @param id The id of the {@link User}
-     * @return A {@link ResponseEntity} that contains the {@link User} if he exist, throw an {@link UserNotFoundException} otherwise
-     * @throws UserNotFoundException An exception with a message that display the id of the non existing {@link User}
+     * Method to find a user by email
+     * @param userId The email of the {@link User}
+     * @return A {@link ResponseEntity} that contains the {@link UserInfosDTO} if he exist, throw an {@link UserNotFoundException} otherwise
+     * @throws UserNotFoundException An exception with a message that display the email of the non existing {@link User}
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable String id) throws UserNotFoundException {
-            User user = this.userService.findUserById(id);
-            return new ResponseEntity<>(user, HttpStatus.OK);
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserInfosDTO> getUserByEmail(@PathVariable String userId) throws UserNotFoundException {
+            User user = this.userService.findUserByEmail(userId);
+            UserInfosDTO userInfo = this.userService.UserToUserInfosDTO(user);
+            return new ResponseEntity<>(userInfo, HttpStatus.OK);
+    }
+
+    /**
+     * Method to find all the friends of a user
+     * @param userId The email of the {@link User}
+     * @return A {@link ResponseEntity} that contains a list of {@link UserInfosDTO} if the user exist, throw an {@link UserNotFoundException} otherwise
+     * @throws UserNotFoundException An exception with a message that display the email of the non existing {@link User}
+     */
+    @GetMapping("/{userId}/friends")
+    public ResponseEntity<List<UserInfosDTO>> getUserFriends(@PathVariable String userId) throws UserNotFoundException {
+        User user = this.userService.findUserByEmail(userId);
+        List<UserInfosDTO> friends = this.userService.ListFriends(user);
+        return new ResponseEntity<>(friends, HttpStatus.OK);
     }
 
 }
