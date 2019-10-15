@@ -1,6 +1,7 @@
 package com.jxc.app.services;
 
 import com.jxc.app.exceptions.UserNotFoundException;
+import com.jxc.app.mapper.UserMapper;
 import com.jxc.app.models.User;
 import com.jxc.app.models.UserInfosDTO;
 import com.jxc.app.repositories.UserRepository;
@@ -22,27 +23,36 @@ public class UserServiceImp implements UserService {
         return userRepository.save(user);
     }
 
-    public User findUserByEmail(String email){
-        return this.userRepository.findById(email)
+    public UserInfosDTO getUserByEmail(String email){
+        User user = (this.userRepository.findById(email))
                 .orElseThrow(() -> new UserNotFoundException("User with email : "+ email + " does not exist."));
+        return UserMapper.ConvertToUserInfosDTO(user);
     }
 
     public List<User> findAllUsers(){
         return this.userRepository.findAll().getContent();
     }
 
-    public UserInfosDTO UserToUserInfosDTO(User user){
-        return new UserInfosDTO(user.getEmail(), user.getUsername(), user.getAddress());
-    }
-
-    public List<UserInfosDTO> ListFriends(User user) {
+    public List<UserInfosDTO> getUserFriends(String email) {
+        User user = (this.userRepository.findById(email))
+                .orElseThrow(() -> new UserNotFoundException("User with email : "+ email + " does not exist."));
         List<String> friendsEmails = user.getFriends();
         List<UserInfosDTO> friends = new ArrayList<>();
-        for (String email : friendsEmails) {
-            Optional<User> userTmp = this.userRepository.findById(email);
+        List<String> emailsToDelete = new ArrayList<>();
+        for (String emailTmp : friendsEmails) {
+            Optional<User> userTmp = this.userRepository.findById(emailTmp);
             if (userTmp.isPresent()){
-                friends.add(this.UserToUserInfosDTO(userTmp.get()));
+                friends.add(UserMapper.ConvertToUserInfosDTO(userTmp.get()));
+            }else {
+                emailsToDelete.add(emailTmp);
             }
+        }
+        if (!emailsToDelete.isEmpty()){
+            for (String emailTmp : emailsToDelete) {
+                friendsEmails.remove(emailTmp);
+            }
+            user.setFriends(friendsEmails);
+            this.userRepository.save(user);
         }
         return friends;
     }

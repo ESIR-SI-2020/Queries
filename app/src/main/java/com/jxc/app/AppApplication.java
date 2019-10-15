@@ -2,6 +2,7 @@ package com.jxc.app;
 
 import com.jxc.app.models.Address;
 import com.jxc.app.models.User;
+import com.jxc.app.models.UserInfosDTO;
 import com.jxc.app.services.UserService;
 
 import java.util.Arrays;
@@ -45,7 +46,7 @@ public class AppApplication implements CommandLineRunner {
 
         userService.save(user0);
 
-        User user = userService.findUserByEmail("0");
+        UserInfosDTO user = userService.getUserByEmail("0");
         log.info("The user :" + user + "has been saved in database");
 
         userService.save(user1);

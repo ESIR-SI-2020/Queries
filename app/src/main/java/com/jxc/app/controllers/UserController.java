@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -30,27 +33,25 @@ public class UserController {
 
     /**
      * Method to find a user by email
-     * @param userId The email of the {@link User}
+     * @param email The email of the {@link User}
      * @return A {@link ResponseEntity} that contains the {@link UserInfosDTO} if he exist, throw an {@link UserNotFoundException} otherwise
      * @throws UserNotFoundException An exception with a message that display the email of the non existing {@link User}
      */
-    @GetMapping("/{userId}")
-    public ResponseEntity<UserInfosDTO> getUserByEmail(@PathVariable String userId) throws UserNotFoundException {
-            User user = this.userService.findUserByEmail(userId);
-            UserInfosDTO userInfo = this.userService.UserToUserInfosDTO(user);
-            return new ResponseEntity<>(userInfo, HttpStatus.OK);
+    @GetMapping("/{email}")
+    public ResponseEntity<UserInfosDTO> getUserByEmail(@PathVariable String email) throws UserNotFoundException {
+            UserInfosDTO user = this.userService.getUserByEmail(email);
+            return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     /**
      * Method to find all the friends of a user
-     * @param userId The email of the {@link User}
+     * @param email The email of the {@link User}
      * @return A {@link ResponseEntity} that contains a list of {@link UserInfosDTO} if the user exist, throw an {@link UserNotFoundException} otherwise
      * @throws UserNotFoundException An exception with a message that display the email of the non existing {@link User}
      */
-    @GetMapping("/{userId}/friends")
-    public ResponseEntity<List<UserInfosDTO>> getUserFriends(@PathVariable String userId) throws UserNotFoundException {
-        User user = this.userService.findUserByEmail(userId);
-        List<UserInfosDTO> friends = this.userService.ListFriends(user);
+    @GetMapping("/{email}/friends")
+    public ResponseEntity<List<UserInfosDTO>> getUserFriends(@PathVariable String email) throws UserNotFoundException {
+        List<UserInfosDTO> friends = this.userService.getUserFriends(email);
         return new ResponseEntity<>(friends, HttpStatus.OK);
     }
 

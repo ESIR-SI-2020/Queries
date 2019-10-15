@@ -15,11 +15,11 @@ public interface UserService {
     User save(User user);
 
     /**
-     * Method to find a {@link User} by id
-     * @param id id of the {@link User}
+     * Method to find a {@link User} by email
+     * @param email the email of the {@link User}
      * @return the {@link User } if he exist, throw an {@link com.jxc.app.exceptions.UserNotFoundException} otherwise
      */
-    User findUserByEmail(String email);
+    UserInfosDTO getUserByEmail(String email);
 
     /**
      * Method to find all {@link User}
@@ -27,16 +27,11 @@ public interface UserService {
      */
     List<User> findAllUsers();
 
-    /**
-     * Method to convert a {@link User} to {@link UserInfosDTO}
-     * @return a {@link UserInfosDTO}
-     */
-    UserInfosDTO UserToUserInfosDTO(User user);
 
     /**
      * Method to list all the friends of a {@link User}
      * @return a list of {@link UserInfosDTO}
      */
-    List<UserInfosDTO> ListFriends(User user);
+    List<UserInfosDTO> getUserFriends(String email);
 
 }
