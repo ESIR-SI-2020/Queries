@@ -1,4 +1,4 @@
-package com.jxc.app.models;
+package com.jxc.app.models.dto;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
