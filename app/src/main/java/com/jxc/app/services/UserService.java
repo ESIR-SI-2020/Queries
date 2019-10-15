@@ -1,10 +1,7 @@
 package com.jxc.app.services;
 
-import com.jxc.app.models.Article;
-import com.jxc.app.models.ArticleConsultationDTO;
 import com.jxc.app.models.User;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface UserService {
@@ -29,11 +26,6 @@ public interface UserService {
      */
     List<User> findAllUsers();
 
-    /**
-     * Method to convert an {@link Article} to an {@link ArticleConsultationDTO}
-     * @param article the article to be converted
-     * @return an {@link ArticleConsultationDTO}
-     */
-    public ArticleConsultationDTO articleToArticleConsultationDTO(Article article);
+
 
 }
