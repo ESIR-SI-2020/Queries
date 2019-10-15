@@ -2,6 +2,7 @@ package com.jxc.app;
 
 import com.jxc.app.models.Address;
 import com.jxc.app.models.User;
+import com.jxc.app.models.UserInfosDTO;
 import com.jxc.app.services.UserService;
 
 import java.util.Arrays;
@@ -39,13 +40,13 @@ public class AppApplication implements CommandLineRunner {
         Address address1 = new Address("postalCode1", "street1", 1, "complement1");
         Address address2 = new Address("postalCode2", "street2", 2, "complement2");
 
-        User user0 = new User("0", "user0", "user0@mail.com", "http://www.photo.com/0.png", "bio0", address0, Arrays.asList("1", "2"));
-        User user1 = new User("1", "user1", "user1@mail.com", "http://www.photo.com/1.png", "bio1", address1, Arrays.asList("0", "2"));
-        User user2 = new User("2", "user2", "user2@mail.com", "http://www.photo.com/2.png", "bio2", address2, Arrays.asList("0", "1"));
+        User user0 = new User("0", "user0", "Pwd/1", address0);
+        User user1 = new User("1", "user1", "Pwd/2", address1, Arrays.asList(user0.getEmail()) , Arrays.asList(), Arrays.asList());
+        User user2 = new User("2", "user2", "Pwd/3", address2, Arrays.asList(user0.getEmail(), user1.getEmail()) , Arrays.asList(), Arrays.asList());
 
         userService.save(user0);
 
-        User user = userService.findUserById("0");
+        UserInfosDTO user = userService.getUserByEmail("0");
         log.info("The user :" + user + "has been saved in database");
 
         userService.save(user1);
