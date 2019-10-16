@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.jxc</groupId>
-    <artifactId>app</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>app</name>
+    <artifactId>readapis</artifactId>
+    <version>0.1.0</version>
+    <name>readapis</name>
 
     <properties>
         <java.version>1.8</java.version>
@@ -54,12 +54,19 @@
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>transport</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.elasticsearch.plugin</groupId>
             <artifactId>transport-netty4-client</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.jxc</groupId>
+            <artifactId>dbmanager</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+
     </dependencies>
+
 
     <build>
         <plugins>
