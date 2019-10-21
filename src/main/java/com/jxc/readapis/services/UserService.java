@@ -1,7 +1,7 @@
 package com.jxc.readapis.services;
 
-import com.jxc.dbmanager.models.User;
 import com.jxc.readapis.dto.UserInfosDTO;
+import fr.esir.jxc.domain.models.User;
 
 import java.util.List;
 

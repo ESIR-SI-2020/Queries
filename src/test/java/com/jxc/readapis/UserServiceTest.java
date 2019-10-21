@@ -1,11 +1,11 @@
 package com.jxc.readapis;
 
-import com.jxc.dbmanager.models.Address;
-import com.jxc.dbmanager.models.Article;
-import com.jxc.dbmanager.models.User;
 import com.jxc.readapis.dto.UserInfosDTO;
 import com.jxc.readapis.exceptions.UserNotFoundException;
 import com.jxc.readapis.services.UserService;
+import fr.esir.jxc.domain.models.Address;
+import fr.esir.jxc.domain.models.Article;
+import fr.esir.jxc.domain.models.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
