@@ -1,10 +1,10 @@
 package com.jxc.readapis.services;
 
-import com.jxc.dbmanager.models.User;
-import com.jxc.dbmanager.repositories.UserRepository;
 import com.jxc.readapis.dto.UserInfosDTO;
 import com.jxc.readapis.exceptions.UserNotFoundException;
 import com.jxc.readapis.mappers.UserMapper;
+import fr.esir.jxc.domain.models.User;
+import fr.esir.jxc.elasticsearch.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

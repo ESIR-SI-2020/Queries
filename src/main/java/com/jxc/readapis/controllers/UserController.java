@@ -1,10 +1,10 @@
 package com.jxc.readapis.controllers;
 
-import com.jxc.dbmanager.models.User;
 import com.jxc.readapis.exceptions.UserNotFoundException;
 import com.jxc.readapis.dto.UserInfosDTO;
 import com.jxc.readapis.services.UserService;
 
+import fr.esir.jxc.domain.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

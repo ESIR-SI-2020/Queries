@@ -60,9 +60,14 @@
         </dependency>
 
         <dependency>
-            <groupId>com.jxc</groupId>
-            <artifactId>dbmanager</artifactId>
-            <version>0.1.0</version>
+            <groupId>fr.esir.jxc</groupId>
+            <artifactId>domain</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.esir.jxc</groupId>
+            <artifactId>elastic-search</artifactId>
+            <version>1.0.0</version>
         </dependency>
 
     </dependencies>
