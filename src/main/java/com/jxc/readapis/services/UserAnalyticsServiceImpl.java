@@ -8,21 +8,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+@Service
 public class UserAnalyticsServiceImpl implements UserAnalyticsService {
 
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
 
-    private List<UserAdded> findAll() {
+    public List<UserAdded> findAll() {
         QueryBuilder queryBuilder = QueryBuilders.matchAllQuery();
         SearchQuery searchQuery = new NativeSearchQuery(queryBuilder);
-        return elasticsearchTemplate.queryForList(searchQuery, UserAdded.class);
+        return this.elasticsearchTemplate.queryForList(searchQuery, UserAdded.class);
     }
 
 
