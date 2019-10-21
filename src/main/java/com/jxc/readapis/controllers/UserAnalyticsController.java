@@ -22,6 +22,10 @@ public class UserAnalyticsController {
     @Autowired
     private UserAnalyticsService userAnalyticsService;
 
+    /**
+     * Return the number of users created today
+     * @return
+     */
     @GetMapping()
     public ResponseEntity<List<UserAdded>> getNbOfUsersCreatedToday() {
         LocalDate localDate = LocalDate.now();
