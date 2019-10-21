@@ -1,6 +1,5 @@
 package com.jxc.app.services;
 
-import com.jxc.app.exceptions.UserNotFoundException;
 import com.jxc.app.models.User;
 import com.jxc.app.repositories.UserRepository;
 
