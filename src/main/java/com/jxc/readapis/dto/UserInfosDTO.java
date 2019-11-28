@@ -1,6 +1,6 @@
 package com.jxc.readapis.dto;
 
-import com.jxc.dbmanager.models.Address;
+import fr.esir.jxc.domain.models.Address;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

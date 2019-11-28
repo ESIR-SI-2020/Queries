@@ -1,6 +1,6 @@
 package com.jxc.readapis;
 
-import com.jxc.dbmanager.config.ElasticsearchConfig;
+import fr.esir.jxc.elasticsearch.config.ElasticsearchConfig;
 import com.jxc.readapis.services.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 @SpringBootApplication
-@ComponentScan(basePackageClasses  = {
+@ComponentScan(basePackages = "fr.esir.jxc", basePackageClasses  = {
         UserService.class,
         ElasticsearchConfig.class
 })
