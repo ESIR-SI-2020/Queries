@@ -1,5 +1,25 @@
 type Query {
-    userByEmail(email: ID!): User
+    findUserByEmail(email: ID!): User
+    findAllUsers: [User]
+}
+
+type Mutation {
+    createUser(user: UserInput!): User
+}
+
+input UserInput {
+    email: ID!
+    username: String!
+    password: String!
+    address: AddressInput!
+    friends: [String]
+}
+
+input AddressInput {
+    postalCode: String!
+    street: String!
+    streetNumber: String!
+    complement: String
 }
 
 type User {
@@ -10,8 +30,8 @@ type User {
 }
 
 type Address {
-    postalCode: String
-    street: String
-    streetNumber: String
+    postalCode: String!
+    street: String!
+    streetNumber: String!
     complement: String
 }

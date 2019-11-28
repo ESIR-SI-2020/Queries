@@ -1,0 +1,26 @@
+extend type Query {
+    findArticleById(id: ID!): Article
+    findAllArticles: [Article]
+}
+
+extend type Mutation {
+    createArticle(article: ArticleInput!): Article
+}
+
+input ArticleInput {
+     id: ID!
+     url: String!
+     owner: String!
+     sharedBy: String
+     tags: [String]
+     suggestedTags: [String]
+}
+
+type Article {
+    id: ID!
+    url: String!
+    owner: String!
+    sharedBy: String
+    tags: [String]
+    suggestedTags: [String]
+}

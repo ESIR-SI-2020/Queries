@@ -20,6 +20,7 @@
         <elasticsearch.version>5.6.0</elasticsearch.version>
         <graphql-spring-boot-starter.version>5.0.2</graphql-spring-boot-starter.version>
         <graphql-java-tools.version>5.2.4</graphql-java-tools.version>
+        <graphiql.version>5.0.2</graphiql.version>
     </properties>
 
     <dependencies>
@@ -75,6 +76,11 @@
             <groupId>com.graphql-java</groupId>
             <artifactId>graphql-java-tools</artifactId>
             <version>${graphql-java-tools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.graphql-java</groupId>
+            <artifactId>graphiql-spring-boot-starter</artifactId>
+            <version>${graphiql.version}</version>
         </dependency>
 
         <dependency>
