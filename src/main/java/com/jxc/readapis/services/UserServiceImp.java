@@ -1,10 +1,10 @@
 package com.jxc.readapis.services;
 
+import fr.esir.jxc.domain.models.User;
+import fr.esir.jxc.elasticsearch.repositories.UserRepository;
 import com.jxc.readapis.dto.UserInfosDTO;
 import com.jxc.readapis.exceptions.UserNotFoundException;
 import com.jxc.readapis.mappers.UserMapper;
-import fr.esir.jxc.domain.models.User;
-import fr.esir.jxc.elasticsearch.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class UserServiceImp implements UserService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     public User save(User user){
         return userRepository.save(user);
