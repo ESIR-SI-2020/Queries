@@ -2,17 +2,11 @@ type Query {
     userByEmail(email: ID!): User
 }
 
-type Mutation {
-
-}
-
 type User {
     email: ID!
     username: String!
     address: Address!
     friends: [String]
-    articles: [Article]
-    sharedArticles: [Article]
 }
 
 type Address {
@@ -20,11 +14,4 @@ type Address {
     street: String
     streetNumber: String
     complement: String
-}
-
-type Article {
-    id: String!
-    url: String!
-    tags: [String]
-    suggestedTags: [String]
 }

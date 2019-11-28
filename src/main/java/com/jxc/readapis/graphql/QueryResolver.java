@@ -1,9 +1,9 @@
 package com.jxc.readapis.graphql;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import com.jxc.dbmanager.models.User;
-import com.jxc.dbmanager.repositories.UserRepository;
 import com.jxc.readapis.exceptions.UserNotFoundException;
+import fr.esir.jxc.domain.models.User;
+import fr.esir.jxc.elasticsearch.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
