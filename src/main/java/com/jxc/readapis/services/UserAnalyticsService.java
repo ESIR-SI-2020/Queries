@@ -11,7 +11,7 @@ public interface UserAnalyticsService {
     /**
      * @return a list that contains all {@link UserAdded}
      */
-    List<UserAdded> findAll();
+    List<UserAdded> findAllUserAdded();
 
     /**
      * @param date

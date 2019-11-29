@@ -1,8 +1,8 @@
 package com.jxc.readapis.controllers;
 
-import fr.esir.jxc.domain.models.analytics.UserAdded;
 import com.jxc.readapis.dto.Count;
 import com.jxc.readapis.services.UserAnalyticsService;
+import fr.esir.jxc.domain.models.analytics.UserAdded;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -20,8 +20,19 @@ import java.util.List;
 @RequestMapping(value = "/api/v1/analytics", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class UserAnalyticsController {
 
-    @Autowired
+
     private UserAnalyticsService userAnalyticsService;
+
+    public UserAnalyticsController(@Autowired UserAnalyticsService service) {
+        this.userAnalyticsService = service;
+    }
+
+    @GetMapping("/nbofuseradded")
+    public ResponseEntity<Count> getNbOfUserAdded() {
+        List<UserAdded> userAdded= userAnalyticsService.findAllUserAdded();
+
+        return new ResponseEntity<>(new Count(userAdded.size()), HttpStatus.OK);
+    }
 
     /**
      * Return the number of users created today
