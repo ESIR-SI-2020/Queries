@@ -1,7 +1,5 @@
 package com.jxc.readapis;
 
-import fr.esir.jxc.elasticsearch.config.ElasticsearchConfig;
-import com.jxc.readapis.services.UserService;
 import fr.esir.jxc.domain.models.Address;
 import fr.esir.jxc.domain.models.Article;
 import fr.esir.jxc.domain.models.User;
