@@ -1,4 +1,4 @@
-package com.jxc.readapis.graphql;
+package com.jxc.readapis.graphql.Resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
 import fr.esir.jxc.domain.models.Address;

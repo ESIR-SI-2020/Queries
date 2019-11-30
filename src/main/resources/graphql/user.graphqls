@@ -1,10 +1,10 @@
 type Query {
-    findUserByEmail(email: ID!): User
     findAllUsers: [User]
+    findAllUsersFilterBy(filter: FilterUserEnum!, value: FilterUserInput!): [User]
 }
 
 type Mutation {
-    createUser(user: UserInput!): User
+    createUser(user: UserInput!): [User]
 }
 
 input UserInput {
@@ -16,10 +16,24 @@ input UserInput {
 }
 
 input AddressInput {
-    postalCode: String!
-    street: String!
-    streetNumber: String!
+    postalCode: String
+    street: String
+    streetNumber: String
     complement: String
+}
+
+input FilterUserInput {
+    email: String
+    username: String
+    address: AddressInput
+    friend: String
+}
+
+enum FilterUserEnum {
+    email
+    username
+    address
+    friend
 }
 
 type User {

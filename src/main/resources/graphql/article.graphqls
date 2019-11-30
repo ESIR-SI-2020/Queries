@@ -1,6 +1,6 @@
 extend type Query {
-    findArticleById(id: ID!): Article
     findAllArticles: [Article]
+    findAllArticlesFilterBy(filter: FilterArticleEnum!, value: FilterArticleInput!): [Article]
 }
 
 extend type Mutation {
@@ -8,12 +8,30 @@ extend type Mutation {
 }
 
 input ArticleInput {
-     id: ID!
-     url: String!
-     owner: String!
-     sharedBy: String
-     tags: [String]
-     suggestedTags: [String]
+    id: ID!
+    url: String!
+    owner: String!
+    sharedBy: String
+    tags: [String]
+    suggestedTags: [String]
+}
+
+input FilterArticleInput {
+    id: String
+    url: String
+    owner: String
+    sharedBy: String
+    tag: String
+    suggestedTag: String
+}
+
+enum FilterArticleEnum {
+    id
+    url
+    owner
+    sharedBy
+    tag
+    suggestedTag
 }
 
 type Article {

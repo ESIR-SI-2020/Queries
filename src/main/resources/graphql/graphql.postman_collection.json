@@ -1,0 +1,407 @@
+{
+	"info": {
+		"_postman_id": "1ef4524a-19a2-4945-93cf-c954438b4a3e",
+		"name": "graphql",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Queries",
+					"item": [
+						{
+							"name": "findAllUsers",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    findAllUsers{\r\n        email\r\n        username\r\n        address{\r\n            postalCode\r\n            street\r\n            streetNumber\r\n            complement\r\n        }\r\n        friends\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findAllUsersFilterByEmail",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n  findAllUsersFilterBy(filter: email, value: {email: \"user0\"}) {\r\n    email\r\n    username\r\n    address {\r\n      postalCode\r\n      street\r\n      streetNumber\r\n      complement\r\n    }\r\n    friends\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/graphql",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findAllUsersFilterByUsername",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n  findAllUsersFilterBy(filter: username, value: {username: \"username0\"}) {\r\n    email\r\n    username\r\n    address {\r\n      postalCode\r\n      street\r\n      streetNumber\r\n      complement\r\n    }\r\n    friends\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/graphql",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findAllUsersFilterByAddress",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n  findAllUsersFilterBy(filter: address, value: {address: {postalCode: \"postalCode1\", street: \"street1\", streetNumber: \"1\", complement: \"complement1\"}}) {\r\n    email\r\n    username\r\n    address {\r\n      postalCode\r\n      street\r\n      streetNumber\r\n      complement\r\n    }\r\n    friends\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/graphql",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findAllUsersFilterByFriend",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n  findAllUsersFilterBy(filter: friend, value: {friend: \"user0\"}) {\r\n    email\r\n    username\r\n    address {\r\n      postalCode\r\n      street\r\n      streetNumber\r\n      complement\r\n    }\r\n    friends\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/graphql",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Mutations",
+					"item": [
+						{
+							"name": "createUser",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    createUser(user: {\r\n        email: \"4\",\r\n        username: \"username4\",\r\n        password: \"pwd/4\",\r\n        address: {\r\n            postalCode: \"postalCode4\",\r\n            street: \"street4\",\r\n            streetNumber: \"4\",\r\n            complement: \"complement4\"\r\n        },\r\n        friends: [\r\n            \"0\",\r\n            \"1\",\r\n            \"2\",\r\n            \"3\"\r\n        ]\r\n    })\r\n  {\r\n    email\r\n    username\r\n    address{\r\n      postalCode\r\n      street\r\n      streetNumber\r\n      complement\r\n    }\r\n    friends\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/graphql",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Article",
+			"item": [
+				{
+					"name": "Queries",
+					"item": [
+						{
+							"name": "findAllArticles",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    findAllArticles{\r\n        id\r\n        url\r\n        owner\r\n        sharedBy\r\n        tags\r\n        suggestedTags\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/graphql",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findAllArticlesFilterById",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n  findAllArticlesFilterBy(filter: id, value: {id: \"article0\"}) {\r\n    id\r\n    url\r\n    owner\r\n    sharedBy\r\n    tags\r\n    suggestedTags\r\n  }\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findAllArticlesFilterByUrl",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n  findAllArticlesFilterBy(filter: url, value: {url: \"url0\"}) {\r\n    id\r\n    url\r\n    owner\r\n    sharedBy\r\n    tags\r\n    suggestedTags\r\n  }\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findAllArticlesFilterByOwner",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n  findAllArticlesFilterBy(filter: owner, value: {owner: \"user0\"}) {\r\n    id\r\n    url\r\n    owner\r\n    sharedBy\r\n    tags\r\n    suggestedTags\r\n  }\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findAllArticlesFilterBySharedBy",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n  findAllArticlesFilterBy(filter: sharedBy, value: {sharedBy: \"user0\"}) {\r\n    id\r\n    url\r\n    owner\r\n    sharedBy\r\n    tags\r\n    suggestedTags\r\n  }\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findAllArticlesFilterByTag",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n  findAllArticlesFilterBy(filter: tag, value: {tag: \"tag2\"}) {\r\n    id\r\n    url\r\n    owner\r\n    sharedBy\r\n    tags\r\n    suggestedTags\r\n  }\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "findAllArticlesFilterBySuggestedTag",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n  findAllArticlesFilterBy(filter: suggestedTag, value: {suggestedTag: \"suggestedTag2\"}) {\r\n    id\r\n    url\r\n    owner\r\n    sharedBy\r\n    tags\r\n    suggestedTags\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Mutations",
+					"item": [
+						{
+							"name": "createArticle",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    createArticle(article: {\r\n        id: \"article4\",\r\n        url: \"url4\",\r\n        owner: \"user3\",\r\n        sharedBy: \"user1\",\r\n        tags: [\r\n            \"tag4\",\r\n            \"tag4bis\"\r\n        ],\r\n        suggestedTags: [\r\n            \"sharedtag4\",\r\n            \"sharedtag4bis\"\r\n        ]\r\n    })\r\n  {\r\n    id\r\n    url\r\n    owner\r\n    sharedBy\r\n    tags\r\n    suggestedTags\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/graphql",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -13,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 
 @SpringBootApplication
@@ -40,7 +41,7 @@ public class ReadapisApplication implements CommandLineRunner {
         final Address address3 = new Address("postalCode3", "street3", 3, "complement3");
 
         final User user0 = new User("user0", "username0", "Pwd/0", address0);
-        final User user1 = new User("user1", "username1", "Pwd/1", address1, Arrays.asList(user0.getEmail()));
+        final User user1 = new User("user1", "username1", "Pwd/1", address1, Collections.singletonList(user0.getEmail()));
         final User user2 = new User("user2", "username2", "Pwd/2", address2, Arrays.asList(user0.getEmail(), user1.getEmail()));
         final User user3 = new User("user3", "username3", "Pwd/3", address3, Arrays.asList(user0.getEmail(), user1.getEmail(), user2.getEmail()));
 
@@ -50,9 +51,9 @@ public class ReadapisApplication implements CommandLineRunner {
         userRepository.save(user3);
 
         final Article article0 = new Article("article0", "url0", "user0", "", new ArrayList<>(), new ArrayList<>());
-        final Article article1 = new Article("article1", "url1", "user0", "", Arrays.asList("tag1"), new ArrayList<>());
-        final Article article2 = new Article("article2", "url2", "user1", "user0", Arrays.asList("tag2", "tag2bis"), Arrays.asList("sharedtag2", "sharedtag2bis"));
-        final Article article3 = new Article("article3", "url3", "user2", "", new ArrayList<>(), new ArrayList<>());
+        final Article article1 = new Article("article1", "url1", "user0", "", Arrays.asList("tag1", "tag2"), new ArrayList<>());
+        final Article article2 = new Article("article2", "url2", "user1", "user0", Arrays.asList("tag2", "tag2bis"), Arrays.asList("suggestedTag2", "suggestedTag2bis"));
+        final Article article3 = new Article("article3", "url3", "user2", "", Collections.singletonList("tag3"), new ArrayList<>());
 
         articleRepository.save(article0);
         articleRepository.save(article1);
