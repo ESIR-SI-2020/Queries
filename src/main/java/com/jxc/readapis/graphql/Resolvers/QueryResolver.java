@@ -15,6 +15,7 @@ import fr.esir.jxc.elasticsearch.repositories.ArticleRepository;
 import fr.esir.jxc.elasticsearch.repositories.UserRepository;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Component;
