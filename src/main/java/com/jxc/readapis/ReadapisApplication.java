@@ -1,5 +1,6 @@
 package com.jxc.readapis;
 
+import com.jxc.readapis.grpc.services.ArticleServiceImpl;
 import com.jxc.readapis.grpc.services.UserServiceImpl;
 import fr.esir.jxc.domain.models.Address;
 import fr.esir.jxc.domain.models.Article;
@@ -31,7 +32,9 @@ public class ReadapisApplication implements CommandLineRunner {
         SpringApplication.run(ReadapisApplication.class, args);
         Server server = ServerBuilder
                 .forPort(8083)
-                .addService(new UserServiceImpl()).build();
+                .addService(new UserServiceImpl())
+                .addService(new ArticleServiceImpl())
+                .build();
 
         server.start();
         server.awaitTermination();
@@ -69,6 +72,7 @@ public class ReadapisApplication implements CommandLineRunner {
         articleRepository.save(article1);
         articleRepository.save(article2);
         articleRepository.save(article3);
+        
     }
 
 }
