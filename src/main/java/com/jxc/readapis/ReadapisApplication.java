@@ -1,16 +1,20 @@
 package com.jxc.readapis;
 
+import com.jxc.readapis.grpc.UserServiceImpl;
 import fr.esir.jxc.domain.models.Address;
 import fr.esir.jxc.domain.models.Article;
 import fr.esir.jxc.domain.models.User;
 import fr.esir.jxc.elasticsearch.repositories.ArticleRepository;
 import fr.esir.jxc.elasticsearch.repositories.UserRepository;
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,8 +27,14 @@ import java.util.Collections;
 })
 public class ReadapisApplication implements CommandLineRunner {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
         SpringApplication.run(ReadapisApplication.class, args);
+        Server server = ServerBuilder
+                .forPort(8083)
+                .addService(new UserServiceImpl()).build();
+
+        server.start();
+        server.awaitTermination();
         }
 
     @Autowired
