@@ -1,14 +1,14 @@
 package com.jxc.readapis.graphql.Resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
+import com.jxc.readapis.dto.UserInfosDTO;
 import fr.esir.jxc.domain.models.Address;
-import fr.esir.jxc.domain.models.User;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserResolver implements GraphQLResolver<User> {
+public class UserResolver implements GraphQLResolver<UserInfosDTO> {
 
-    public Address address(User user){
+    public Address address(UserInfosDTO user){
         return user.getAddress();
     }
 }

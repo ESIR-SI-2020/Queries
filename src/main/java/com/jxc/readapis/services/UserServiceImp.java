@@ -34,9 +34,7 @@ public class UserServiceImp implements UserService {
     public Page<UserInfosDTO> findAllUsers(Pageable page){
         List<UserInfosDTO> userInfosDTOS = new ArrayList<>();
         Page<User> users = userRepository.findAll(page);
-        userRepository.findAll(page).getContent().forEach(user -> {
-            userInfosDTOS.add(UserMapper.convertToUserInfosDTO(user));
-        });
+        userRepository.findAll(page).getContent().forEach(user -> userInfosDTOS.add(UserMapper.convertToUserInfosDTO(user)));
         return new PageImpl<>(userInfosDTOS, page, users.getTotalElements());
     }
 

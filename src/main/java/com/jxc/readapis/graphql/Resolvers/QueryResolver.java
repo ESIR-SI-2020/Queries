@@ -15,7 +15,6 @@ import fr.esir.jxc.elasticsearch.repositories.ArticleRepository;
 import fr.esir.jxc.elasticsearch.repositories.UserRepository;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Component;
@@ -46,14 +45,13 @@ public class QueryResolver implements GraphQLQueryResolver {
         return userInfosDTOS;
     }
 
-    public List<User> findAllUsersFilterBy(FilterUserEnum filter, FilterUserInput value) {
-        List<User> users = userRepository.findAll().getContent();
-        List<User> filteredUsers = new ArrayList<>();
+    public List<UserInfosDTO> findAllUsersFilterBy(FilterUserEnum filter, FilterUserInput value) {
+        List<UserInfosDTO> filteredUsers = new ArrayList<>();
         switch (filter) {
             case email:
                 if(!StringUtils.isEmpty(value.getEmail())){
-                    Optional<User> user = userRepository.findById(value.getEmail());
-                    user.ifPresent(filteredUsers::add);
+                    Optional<User> optionalUser = userRepository.findById(value.getEmail());
+                    optionalUser.ifPresent(user -> filteredUsers.add(UserMapper.convertToUserInfosDTO(user)));
                 } else {
                     throw new GraphqlServerSideException("Unsupported value. In order to filter by email, value must be a String");
                 }
@@ -64,7 +62,8 @@ public class QueryResolver implements GraphQLQueryResolver {
                     SearchQuery searchQuery = new NativeSearchQueryBuilder()
                             .withQuery(matchQuery("username",value.getUsername()))
                             .build();
-                    filteredUsers.addAll(elasticsearchConfig.elasticsearchTemplate().queryForList(searchQuery, User.class));
+                    elasticsearchConfig.elasticsearchTemplate().queryForList(searchQuery, User.class).forEach(user ->
+                            filteredUsers.add(UserMapper.convertToUserInfosDTO(user)));
                 } else {
                     throw new GraphqlServerSideException("Unsupported value. In order to filter by username, value must be a String");
                 }
@@ -82,30 +81,17 @@ public class QueryResolver implements GraphQLQueryResolver {
                     SearchQuery searchQuery = new NativeSearchQueryBuilder()
                             .withQuery(builder)
                             .build();
-                    filteredUsers.addAll(elasticsearchConfig.elasticsearchTemplate().queryForList(searchQuery, User.class));
+                    elasticsearchConfig.elasticsearchTemplate().queryForList(searchQuery, User.class).forEach(user ->
+                            filteredUsers.add(UserMapper.convertToUserInfosDTO(user)));
                 } else {
                     throw new GraphqlServerSideException("Unsupported value. In order to filter by address, value must be an Address");
-                }
-                break;
-
-            case friend:
-                if(!StringUtils.isEmpty(value.getFriend())){
-                    QueryBuilder builder = boolQuery()
-                            .must(matchAllQuery())
-                            .filter(termQuery("friends", value.getFriend()));
-                    SearchQuery searchQuery = new NativeSearchQueryBuilder()
-                            .withQuery(builder)
-                            .build();
-                    filteredUsers.addAll(elasticsearchConfig.elasticsearchTemplate().queryForList(searchQuery, User.class));
-                } else {
-                    throw new GraphqlServerSideException("Unsupported value. In order to filter by friend, value must be a String");
                 }
                 break;
 
             default:
                 throw new GraphqlServerSideException("Unsupported filter: " + filter + "Filter must be : " + Arrays.toString(FilterUserEnum.values()));
         }
-        filteredUsers.sort(Comparator.comparing(User::getEmail));
+        filteredUsers.sort(Comparator.comparing(UserInfosDTO::getEmail));
         return filteredUsers;
     }
 
@@ -116,7 +102,6 @@ public class QueryResolver implements GraphQLQueryResolver {
     }
 
     public List<Article> findAllArticlesFilterBy(FilterArticleEnum filter, FilterArticleInput value) {
-        List<Article> articles = articleRepository.findAll().getContent();
         List<Article> filteredArticles = new ArrayList<>();
         switch (filter) {
             case id:

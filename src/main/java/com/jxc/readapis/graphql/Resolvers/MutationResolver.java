@@ -1,7 +1,9 @@
 package com.jxc.readapis.graphql.Resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
+import com.jxc.readapis.dto.UserInfosDTO;
 import com.jxc.readapis.graphql.exceptions.GraphqlServerSideException;
+import com.jxc.readapis.mappers.UserMapper;
 import fr.esir.jxc.domain.models.Article;
 import fr.esir.jxc.domain.models.User;
 import fr.esir.jxc.elasticsearch.repositories.ArticleRepository;
@@ -18,11 +20,11 @@ public class MutationResolver implements GraphQLMutationResolver {
     @Autowired
     ArticleRepository articleRepository;
 
-    public User createUser(User user){
+    public UserInfosDTO createUser(User user){
         if (StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword()) || user.getAddress() == null){
             throw new GraphqlServerSideException("Unsupported value. In order to create a User, you must have an email, an username, a password and an address");
         }
-        return userRepository.save(user);
+        return UserMapper.convertToUserInfosDTO(userRepository.save(user));
     }
 
     public Article createArticle(Article article){

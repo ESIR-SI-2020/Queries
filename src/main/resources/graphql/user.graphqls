@@ -1,14 +1,10 @@
 type Query {
-    findAllUsers(page: Pageable!): [User]
-    findAllUsersFilterBy(filter: FilterUserEnum!, value: FilterUserInput!): [User]
+    findAllUsers: [UserInfosDTO]
+    findAllUsersFilterBy(filter: FilterUserEnum!, value: FilterUserInput!): [UserInfosDTO]
 }
 
 type Mutation {
-    createUser(user: UserInput!): User
-}
-
-input Pageable {
-
+    createUser(user: UserInput!): UserInfosDTO
 }
 
 input UserInput {
@@ -37,14 +33,12 @@ enum FilterUserEnum {
     email
     username
     address
-    friend
 }
 
-type User {
+type UserInfosDTO {
     email: ID!
     username: String!
     address: Address!
-    friends: [String]
 }
 
 type Address {
