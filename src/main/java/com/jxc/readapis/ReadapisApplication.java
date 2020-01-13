@@ -1,6 +1,6 @@
 package com.jxc.readapis;
 
-import com.jxc.readapis.grpc.UserServiceImpl;
+import com.jxc.readapis.grpc.services.UserServiceImpl;
 import fr.esir.jxc.domain.models.Address;
 import fr.esir.jxc.domain.models.Article;
 import fr.esir.jxc.domain.models.User;
