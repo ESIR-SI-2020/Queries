@@ -1,10 +1,14 @@
 type Query {
-    findAllUsers: [User]
+    findAllUsers(page: Pageable!): [User]
     findAllUsersFilterBy(filter: FilterUserEnum!, value: FilterUserInput!): [User]
 }
 
 type Mutation {
     createUser(user: UserInput!): User
+}
+
+input Pageable {
+
 }
 
 input UserInput {

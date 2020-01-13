@@ -1,11 +1,13 @@
 package com.jxc.readapis.graphql.Resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import com.jxc.readapis.dto.UserInfosDTO;
 import com.jxc.readapis.graphql.exceptions.GraphqlServerSideException;
 import com.jxc.readapis.graphql.models.FilterArticleInput;
 import com.jxc.readapis.graphql.models.FilterUserInput;
 import com.jxc.readapis.graphql.models.enums.FilterArticleEnum;
 import com.jxc.readapis.graphql.models.enums.FilterUserEnum;
+import com.jxc.readapis.mappers.UserMapper;
 import fr.esir.jxc.domain.models.Article;
 import fr.esir.jxc.domain.models.User;
 import fr.esir.jxc.elasticsearch.config.ElasticsearchConfig;
@@ -35,8 +37,12 @@ public class QueryResolver implements GraphQLQueryResolver {
 
     /*----------------------- USER -----------------------*/
 
-    public List<User> findAllUsers(){
-        return userRepository.findAll().getContent();
+    public List<UserInfosDTO> findAllUsers(){
+        List<UserInfosDTO> userInfosDTOS = new ArrayList<>();
+        userRepository.findAll().getContent().forEach(user -> {
+            userInfosDTOS.add(UserMapper.convertToUserInfosDTO(user));
+        });
+        return userInfosDTOS;
     }
 
     public List<User> findAllUsersFilterBy(FilterUserEnum filter, FilterUserInput value) {
