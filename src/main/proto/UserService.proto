@@ -1,0 +1,23 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_package = "com.jxc.readapis.grpc";
+
+message UserRequest {
+    string email = 1;
+}
+
+message UserInfosDTO {
+    string email = 1;
+    string username = 2;
+    message Address {
+        string postalCode = 1;
+        string street = 2;
+        int32 streetNumber = 3;
+        string complement = 4;
+    }
+    Address address = 3;
+}
+
+service UserService {
+    rpc findUserByEmail(UserRequest) returns (UserInfosDTO);
+}
