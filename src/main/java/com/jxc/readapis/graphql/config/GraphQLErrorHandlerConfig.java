@@ -16,6 +16,7 @@ public class GraphQLErrorHandlerConfig {
     @Bean
     public GraphQLErrorHandler errorHandler() {
         return new GraphQLErrorHandler() {
+
             @Override
             public List<GraphQLError> processErrors(List<GraphQLError> errors) {
                 List<GraphQLError> clientErrors = errors.stream()
@@ -34,7 +35,10 @@ public class GraphQLErrorHandlerConfig {
             }
 
             protected boolean isClientError(GraphQLError error) {
-                return !(error instanceof ExceptionWhileDataFetching || error instanceof Throwable);
+                if (error instanceof ExceptionWhileDataFetching) {
+                    return ((ExceptionWhileDataFetching) error).getException() instanceof GraphQLError;
+                }
+                return !(error instanceof Throwable);
             }
         };
 
