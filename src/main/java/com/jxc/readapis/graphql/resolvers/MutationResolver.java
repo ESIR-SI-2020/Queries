@@ -1,4 +1,4 @@
-package com.jxc.readapis.graphql.Resolvers;
+package com.jxc.readapis.graphql.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.jxc.readapis.dto.UserInfosDTO;
@@ -21,7 +21,7 @@ public class MutationResolver implements GraphQLMutationResolver {
     ArticleRepository articleRepository;
 
     public UserInfosDTO createUser(User user){
-        if (StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword()) || user.getAddress() == null){
+        if (StringUtils.isEmpty(user.getEmail()) || StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword())){
             throw new GraphqlServerSideException("Unsupported value. In order to create a User, you must have an email, an username, a password and an address");
         }
         return UserMapper.convertToUserInfosDTO(userRepository.save(user));

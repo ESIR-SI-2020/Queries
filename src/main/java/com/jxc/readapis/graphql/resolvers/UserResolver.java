@@ -1,4 +1,4 @@
-package com.jxc.readapis.graphql.Resolvers;
+package com.jxc.readapis.graphql.resolvers;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
 import com.jxc.readapis.dto.UserInfosDTO;

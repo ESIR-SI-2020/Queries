@@ -8,4 +8,5 @@ public class FilterUserInput {
     private String email;
     private String username;
     private Address address;
+    private String friend;
 }

@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.jxc</groupId>
     <artifactId>readapis</artifactId>
-    <version>1.1.0-RC</version>
+    <version>1.0.0-RC</version>
     <name>readapis</name>
 
     <properties>
@@ -21,6 +21,8 @@
         <graphql-spring-boot-starter.version>5.0.2</graphql-spring-boot-starter.version>
         <graphql-java-tools.version>5.2.4</graphql-java-tools.version>
         <graphiql.version>5.0.2</graphiql.version>
+        <grpc.version>1.16.1</grpc.version>
+        <domain.version>1.1.0</domain.version>
     </properties>
 
     <dependencies>
@@ -86,20 +88,64 @@
         <dependency>
             <groupId>fr.esir.jxc</groupId>
             <artifactId>domain</artifactId>
-            <version>1.1.0</version>
+            <version>${domain.version}</version>
         </dependency>
         <dependency>
             <groupId>fr.esir.jxc</groupId>
             <artifactId>elastic-search</artifactId>
-            <version>1.1.0</version>
+            <version>${domain.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-netty</artifactId>
+            <version>${grpc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-protobuf</artifactId>
+            <version>${grpc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-stub</artifactId>
+            <version>${grpc.version}</version>
         </dependency>
     </dependencies>
 
     <build>
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.6.1</version>
+            </extension>
+        </extensions>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>0.6.1</version>
+                <configuration>
+                    <protocArtifact>
+                        com.google.protobuf:protoc:3.3.0:exe:${os.detected.classifier}
+                    </protocArtifact>
+                    <pluginId>grpc-java</pluginId>
+                    <pluginArtifact>
+                        io.grpc:protoc-gen-grpc-java:1.4.0:exe:${os.detected.classifier}
+                    </pluginArtifact>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>compile-custom</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
