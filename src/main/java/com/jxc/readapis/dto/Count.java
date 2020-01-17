@@ -6,6 +6,6 @@ import lombok.Value;
 @Value
 @AllArgsConstructor
 public class Count {
-    
+
     private final int count;
 }
