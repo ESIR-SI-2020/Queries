@@ -12,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,9 +42,9 @@ public class UserServiceImp implements UserService {
     public List<UserInfosDTO> getUserFriends(String email) {
         User user = (this.userRepository.findById(email))
                 .orElseThrow(() -> new UserNotFoundException("User with email : "+ email + " does not exist."));
-        List<String> friendsEmails = user.getFriends();
+        List<String> friendsEmails = user.getFriends() != null ? user.getFriends() : Collections.emptyList();
         List<UserInfosDTO> friends = new ArrayList<>();
-        user.getFriends().forEach(friendEmail -> {
+        friendsEmails.forEach(friendEmail -> {
             Optional<User> friend = userRepository.findById(email);
             friend.ifPresent(value -> friends.add(UserMapper.convertToUserInfosDTO(value)));
         });

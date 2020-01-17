@@ -1,9 +1,8 @@
 package com.jxc.readapis.grpc.services;
 
-import com.google.protobuf.Empty;
 import com.jxc.readapis.grpc.UserInfosDTO;
 import com.jxc.readapis.grpc.UserRequest;
-import com.jxc.readapis.grpc.UserServiceGrpc;
+import com.jxc.readapis.grpc.generated.UserServiceGrpc;
 import com.jxc.readapis.grpc.mappers.UserMapper;
 import com.jxc.readapis.services.UserService;
 import fr.esir.jxc.elasticsearch.repositories.UserRepository;

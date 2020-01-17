@@ -33,6 +33,7 @@ enum FilterUserEnum {
     email
     username
     address
+    friend
 }
 
 type UserInfosDTO {

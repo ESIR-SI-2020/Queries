@@ -2,10 +2,8 @@ package com.jxc.readapis.grpc.services;
 
 import com.jxc.readapis.grpc.Article;
 import com.jxc.readapis.grpc.ArticleRequest;
-import com.jxc.readapis.grpc.ArticleServiceGrpc;
-import com.jxc.readapis.grpc.UserInfosDTO;
+import com.jxc.readapis.grpc.generated.ArticleServiceGrpc;
 import com.jxc.readapis.grpc.mappers.ArticleMapper;
-import com.jxc.readapis.grpc.mappers.UserMapper;
 import fr.esir.jxc.elasticsearch.repositories.ArticleRepository;
 import io.grpc.stub.StreamObserver;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -58,7 +58,11 @@ public class UserController {
     @GetMapping("/{email}/friends")
     public ResponseEntity<List<UserInfosDTO>> getUserFriends(@PathVariable String email) {
         List<UserInfosDTO> friends = this.userService.getUserFriends(email);
-        return new ResponseEntity<>(friends, HttpStatus.OK);
+        if (!friends.isEmpty()){
+            return new ResponseEntity<>(friends, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 
 }
