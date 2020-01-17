@@ -56,4 +56,10 @@ public class UserServiceImp implements UserService {
         return friends;
     }
 
+    public User findUserByEmail(String email) {
+        User user = (this.userRepository.findById(email))
+                .orElseThrow(() -> new UserNotFoundException("User with email : "+ email + " does not exist."));
+        return user;
+    }
+
 }

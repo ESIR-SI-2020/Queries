@@ -34,4 +34,5 @@ public interface UserService {
      */
     List<UserInfosDTO> getUserFriends(String email);
 
+    User findUserByEmail(String email);
 }

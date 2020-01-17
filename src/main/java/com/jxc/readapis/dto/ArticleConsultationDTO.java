@@ -1,4 +1,4 @@
-package com.jxc.app.models.dto;
+package com.jxc.readapis.dto;
 
 import lombok.*;
 import org.springframework.data.annotation.Id;
@@ -13,6 +13,8 @@ public class ArticleConsultationDTO {
     private String id;
     @NonNull
     private String url;
+    private String owner;
+    private String sharedBy;
     private List<String> tags;
     private String title;
     private String body;
