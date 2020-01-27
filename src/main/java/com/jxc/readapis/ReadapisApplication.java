@@ -73,5 +73,4 @@ public class ReadapisApplication implements CommandLineRunner {
         articleRepository.save(article2);
         articleRepository.save(article3);
     }
-
 }
