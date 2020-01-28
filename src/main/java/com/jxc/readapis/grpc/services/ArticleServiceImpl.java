@@ -6,10 +6,12 @@ import com.jxc.readapis.grpc.generated.ArticleServiceGrpc;
 import com.jxc.readapis.grpc.mappers.ArticleMapper;
 import fr.esir.jxc.elasticsearch.repositories.ArticleRepository;
 import io.grpc.stub.StreamObserver;
+import org.lognet.springboot.grpc.GRpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
+@GRpcService
 public class ArticleServiceImpl extends ArticleServiceGrpc.ArticleServiceImplBase{
 
     @Autowired
