@@ -39,8 +39,8 @@ public class UserAnalyticsController {
     public ResponseEntity<Count> getNbOfUsersCreatedToday() {
         LocalDate localDate = LocalDate.now();
 
-        Date dateDebut = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        Date dateFin = Date.from(localDate.atTime(23, 59, 59).atZone(ZoneId.systemDefault()).toInstant());
+        Long dateDebut = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime();
+        Long dateFin = Date.from(localDate.atTime(23, 59, 59).atZone(ZoneId.systemDefault()).toInstant()).getTime();
 
         List<UserAdded> userAddedTodayList = userAnalyticsService.findAllUserAddedByDateInterval(dateDebut, dateFin);
 
@@ -48,7 +48,7 @@ public class UserAnalyticsController {
     }
 
 
-    @DeleteMapping("/deleteuseradded/{id}")
+    @PostMapping("/deleteuseradded/{id}")
     public ResponseEntity<HttpStatus> deleteUserAdded(@PathVariable String id) {
         UserAdded userAdded = userAnalyticsService.findOneById(id);
 
