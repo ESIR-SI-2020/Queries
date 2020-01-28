@@ -10,10 +10,8 @@ import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -54,16 +52,9 @@ public class UserAnalyticsServiceImpl implements UserAnalyticsService {
 
 
     @Override
-    public List<UserAdded> findAllUserAddedByDateInterval(Date dateDebut, Date dateFin) {
-       /*SearchQuery searchQuery = new NativeSearchQueryBuilder()
-                                        .withQuery(matchQuery("creationDate", dateDebut))
-                                        .build();*/
-      //  SearchSourceBuilder builder = new SearchSourceBuilder();
-       // builder.query(QueryBuilders.rangeQuery("creationDate").from(dateDebut).to(dateFin));
-        String dateDebutFormat = DateFormat.getDateInstance().format(dateDebut);
-        String dateFinFormat = DateFormat.getDateInstance().format(dateDebut);
+    public List<UserAdded> findAllUserAddedByDateInterval(Long dateDebut, Long dateFin) {
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
-                .withQuery(QueryBuilders.rangeQuery("creationDate").gte(dateDebutFormat).lte(dateFinFormat))
+                .withQuery(QueryBuilders.rangeQuery("creationDate").gte(dateDebut).lte(dateFin))
                 .build();
 
         return this.elasticsearchTemplate.queryForList(searchQuery, UserAdded.class);
