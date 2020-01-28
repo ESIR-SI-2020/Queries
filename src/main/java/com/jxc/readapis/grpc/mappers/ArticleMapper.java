@@ -3,6 +3,7 @@ package com.jxc.readapis.grpc.mappers;
 
 import com.jxc.readapis.grpc.Article;
 import lombok.experimental.UtilityClass;
+import org.springframework.util.CollectionUtils;
 
 @UtilityClass
 public class ArticleMapper {
@@ -16,9 +17,9 @@ public class ArticleMapper {
                 .setId(article.getId())
                 .setUrl(article.getUrl())
                 .setOwner(article.getOwner())
+                .addAllTags(article.getTags())
+                .addAllSuggestedTags(article.getSuggestedTags())
                 .setSharedBy(article.getSharedBy())
-                .setTags(1, article.getTags().get(1))
-                .setSuggestedTags(1, article.getSuggestedTags().get(1))
                 .build();
     }
 }

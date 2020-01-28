@@ -1,14 +1,10 @@
 package com.jxc.readapis;
 
-import com.jxc.readapis.grpc.services.ArticleServiceImpl;
-import com.jxc.readapis.grpc.services.UserServiceImpl;
 import fr.esir.jxc.domain.models.Address;
 import fr.esir.jxc.domain.models.Article;
 import fr.esir.jxc.domain.models.User;
 import fr.esir.jxc.elasticsearch.repositories.ArticleRepository;
 import fr.esir.jxc.elasticsearch.repositories.UserRepository;
-import io.grpc.Server;
-import io.grpc.ServerBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -28,22 +24,14 @@ import java.util.Collections;
 })
 public class ReadapisApplication implements CommandLineRunner {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        SpringApplication.run(ReadapisApplication.class, args);
-        Server server = ServerBuilder
-                .forPort(8083)
-                .addService(new UserServiceImpl())
-                .addService(new ArticleServiceImpl())
-                .build();
-
-        server.start();
-        server.awaitTermination();
-        }
-
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private ArticleRepository articleRepository;
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        SpringApplication.run(ReadapisApplication.class, args);
+    }
 
     @Override
     public void run(String... args) throws Exception {
@@ -73,5 +61,4 @@ public class ReadapisApplication implements CommandLineRunner {
         articleRepository.save(article2);
         articleRepository.save(article3);
     }
-
 }

@@ -95,20 +95,12 @@
             <artifactId>elastic-search</artifactId>
             <version>${domain.version}</version>
         </dependency>
+
+        <!-- grpc -->
         <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-netty</artifactId>
-            <version>${grpc.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-protobuf</artifactId>
-            <version>${grpc.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-stub</artifactId>
-            <version>${grpc.version}</version>
+            <groupId>io.github.lognet</groupId>
+            <artifactId>grpc-spring-boot-starter</artifactId>
+            <version>3.5.1</version>
         </dependency>
     </dependencies>
 
