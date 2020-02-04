@@ -1,7 +1,7 @@
 package com.jxc.readapis.services;
 
-import com.jxc.readapis.dto.UserInfosDTO;
-import fr.esir.jxc.domain.models.User;
+import com.jxc.readapis.dto.ArticleInfosDTO;
+import fr.esir.jxc.domain.models.Article;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public interface ArticleService {
 
     /**
      * Method to save a {@link Article}, only here for testing purpose
-     * @param user The {@link Article} to save
+     * @param article The {@link Article} to save
      * @return The article saved
      */
     Article save(Article article);

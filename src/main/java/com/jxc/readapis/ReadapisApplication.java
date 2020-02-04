@@ -2,6 +2,7 @@ package com.jxc.readapis;
 
 import com.jxc.readapis.grpc.services.ArticleServiceImpl;
 import com.jxc.readapis.grpc.services.UserServiceImpl;
+import com.jxc.readapis.services.ArticleServiceImp;
 import fr.esir.jxc.domain.models.Address;
 import fr.esir.jxc.domain.models.Article;
 import fr.esir.jxc.domain.models.User;
@@ -72,5 +73,7 @@ public class ReadapisApplication implements CommandLineRunner {
         articleRepository.save(article1);
         articleRepository.save(article2);
         articleRepository.save(article3);
+
+        System.out.println("Begin");
     }
 }

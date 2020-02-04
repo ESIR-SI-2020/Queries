@@ -1,9 +1,9 @@
 package com.jxc.readapis.controllers;
 
-import com.jxc.readapis.dto.UserInfosDTO;
-import com.jxc.readapis.exceptions.UserNotFoundException;
-import com.jxc.readapis.services.UserService;
-import fr.esir.jxc.domain.models.User;
+import com.jxc.readapis.dto.ArticleInfosDTO;
+import com.jxc.readapis.exceptions.ArticleNotFoundException;
+import com.jxc.readapis.services.ArticleService;
+import fr.esir.jxc.domain.models.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping(value = "/api/v1/articles", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 // @RequestMapping(value = "${url.version:/api/v1}" + "${url.articles:/users}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 // I'm still looking for how to use the properties to store the url, using ${} is not working for me
-public class UserController {
+public class ArticleController {
 
     @Autowired
     ArticleService articleService;

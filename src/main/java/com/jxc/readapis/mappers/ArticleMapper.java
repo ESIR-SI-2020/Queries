@@ -1,7 +1,7 @@
 package com.jxc.readapis.mappers;
 
-import com.jxc.readapis.dto.UserInfosDTO;
-import fr.esir.jxc.domain.models.User;
+import com.jxc.readapis.dto.ArticleInfosDTO;
+import fr.esir.jxc.domain.models.Article;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
@@ -12,6 +12,6 @@ public class ArticleMapper {
      * @return a {@link ArticleInfosDTO}
      */
     public ArticleInfosDTO convertToArticleInfosDTO(Article article){
-        return new ArticleInfosDTO(article.getEmail(), article.getUsername(), article.getAddress());
+        return new ArticleInfosDTO(article.getId(), article.getUrl(), article.getOwner(), article.getSharedBy(), article.getTags(), article.getSuggestedTags());
     }
 }
