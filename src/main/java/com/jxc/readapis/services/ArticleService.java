@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface ArticleService {
 
-    List<ArticleInfoDTO> getUserArticles(String email);
+    List<Article> getUserArticles(String owner);
 
-    List<ArticleInfoDTO> getUserArticlesByTag(String email, String tag);
+    List<Article> getUserArticlesByTag(String owner, String tag);
 
 }
