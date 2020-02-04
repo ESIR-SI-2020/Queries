@@ -25,7 +25,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping()
     public ResponseEntity<Page<UserInfosDTO>> getAllUsers(@PageableDefault(size = 20) final Pageable page) {

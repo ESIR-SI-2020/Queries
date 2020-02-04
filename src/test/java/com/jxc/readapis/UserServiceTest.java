@@ -137,6 +137,24 @@ public class UserServiceTest {
 
     }
 
+    @Test
+    public void testFindAllUsers() {
+
+        List<User> userList = new ArrayList<>();
+        userList.add(user2);
+        userList.add(user3);
+
+        userService.save(user2);
+        userService.save(user3);
+
+        List<User> userListTest = userService.findAllUsers();
+
+        assertEquals(userList.size(), userListTest.size());
+
+        assertTrue(userListTest.contains(user2));
+        assertTrue(userListTest.contains(user3));
+
+    }
 
     public void initElasticSearch(){
         esTemplate.deleteIndex(User.class);
