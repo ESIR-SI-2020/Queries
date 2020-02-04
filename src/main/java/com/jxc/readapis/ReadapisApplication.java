@@ -11,6 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -23,14 +24,14 @@ import java.util.Collections;
 })
 public class ReadapisApplication implements CommandLineRunner {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ReadapisApplication.class, args);
-        }
-
     @Autowired
     private UserRepository userRepository;
     @Autowired
     private ArticleRepository articleRepository;
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        SpringApplication.run(ReadapisApplication.class, args);
+    }
 
     @Override
     public void run(String... args) throws Exception {
@@ -51,14 +52,14 @@ public class ReadapisApplication implements CommandLineRunner {
         userRepository.save(user3);
 
         final Article article0 = new Article("article0", "url0", "user0", "", new ArrayList<>(), new ArrayList<>());
-        final Article article1 = new Article("article1", "url1", "user0", "", Arrays.asList("tag1", "tag2"), new ArrayList<>());
-        final Article article2 = new Article("article2", "url2", "user1", "user0", Arrays.asList("tag2", "tag2bis"), Arrays.asList("suggestedTag2", "suggestedTag2bis"));
-        final Article article3 = new Article("article3", "url3", "user2", "", Collections.singletonList("tag3"), new ArrayList<>());
+        final Article article1 = new Article("article1", "url1", "user1", "", Arrays.asList("tag1", "tag2"), new ArrayList<>());
+        final Article article2 = new Article("article2", "url2", "user2", "user4", Arrays.asList("tag2", "tag2bis"), Arrays.asList("suggestedTag2", "suggestedTag2bis"));
+        final Article article3 = new Article("article3", "url3", "user3", "", Collections.singletonList("tag3"), new ArrayList<>());
 
         articleRepository.save(article0);
         articleRepository.save(article1);
         articleRepository.save(article2);
         articleRepository.save(article3);
-    }
 
+    }
 }
