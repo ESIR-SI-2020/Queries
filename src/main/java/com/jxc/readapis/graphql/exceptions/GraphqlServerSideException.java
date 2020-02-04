@@ -4,6 +4,7 @@ import graphql.ErrorType;
 import graphql.GraphQLError;
 import graphql.language.SourceLocation;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ public class GraphqlServerSideException extends RuntimeException implements Grap
 
     @Override
     public List<SourceLocation> getLocations() {
-        return null;
+        return Collections.emptyList();
     }
 
     @Override

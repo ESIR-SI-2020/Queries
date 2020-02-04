@@ -5,6 +5,9 @@ import com.jxc.readapis.exceptions.UserNotFoundException;
 import com.jxc.readapis.services.UserService;
 import fr.esir.jxc.domain.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +28,13 @@ public class UserController {
     UserService userService;
 
     @GetMapping()
-    public ResponseEntity<List<User>> getAllUsers() {
-        List<User> userList = this.userService.findAllUsers();
-        return new ResponseEntity<>(userList, HttpStatus.OK);
+    public ResponseEntity<Page<UserInfosDTO>> getAllUsers(@PageableDefault(size = 20) final Pageable page) {
+        Page<UserInfosDTO> userPage = this.userService.findAllUsers(page);
+        if (userPage.hasContent()){
+            return new ResponseEntity<>(userPage, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 
     /**
@@ -37,7 +44,7 @@ public class UserController {
      * @throws UserNotFoundException An exception with a message that display the email of the non existing {@link User}
      */
     @GetMapping("/{email}")
-    public ResponseEntity<UserInfosDTO> getUserByEmail(@PathVariable String email) throws UserNotFoundException {
+    public ResponseEntity<UserInfosDTO> getUserByEmail(@PathVariable String email) {
         UserInfosDTO user = this.userService.getUserByEmail(email);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
@@ -49,9 +56,13 @@ public class UserController {
      * @throws UserNotFoundException An exception with a message that display the email of the non existing {@link User}
      */
     @GetMapping("/{email}/friends")
-    public ResponseEntity<List<UserInfosDTO>> getUserFriends(@PathVariable String email) throws UserNotFoundException {
+    public ResponseEntity<List<UserInfosDTO>> getUserFriends(@PathVariable String email) {
         List<UserInfosDTO> friends = this.userService.getUserFriends(email);
-        return new ResponseEntity<>(friends, HttpStatus.OK);
+        if (!friends.isEmpty()){
+            return new ResponseEntity<>(friends, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
     }
 
 }
