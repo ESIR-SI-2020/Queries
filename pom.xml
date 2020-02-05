@@ -72,24 +72,6 @@
             <groupId>org.elasticsearch.plugin</groupId>
             <artifactId>transport-netty4-client</artifactId>
         </dependency>
-
-        <!-- Dependencies for Graphql-->
-        <dependency>
-            <groupId>com.graphql-java</groupId>
-            <artifactId>graphql-spring-boot-starter</artifactId>
-            <version>${graphql-spring-boot-starter.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.graphql-java</groupId>
-            <artifactId>graphql-java-tools</artifactId>
-            <version>${graphql-java-tools.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.graphql-java</groupId>
-            <artifactId>graphiql-spring-boot-starter</artifactId>
-            <version>${graphiql.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>fr.esir.jxc</groupId>
             <artifactId>domain</artifactId>
@@ -101,12 +83,6 @@
             <version>${domain.version}</version>
         </dependency>
 
-        <!-- grpc -->
-        <dependency>
-            <groupId>io.github.lognet</groupId>
-            <artifactId>grpc-spring-boot-starter</artifactId>
-            <version>3.5.1</version>
-        </dependency>
     </dependencies>
 
     <build>
