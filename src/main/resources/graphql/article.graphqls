@@ -1,0 +1,44 @@
+extend type Query {
+    findAllArticles: [Article]
+    findAllArticlesFilterBy(filter: FilterArticleEnum!, value: FilterArticleInput!): [Article]
+}
+
+extend type Mutation {
+    createArticle(article: ArticleInput!): Article
+}
+
+input ArticleInput {
+    id: ID!
+    url: String!
+    owner: String!
+    sharedBy: String
+    tags: [String]
+    suggestedTags: [String]
+}
+
+input FilterArticleInput {
+    id: String
+    url: String
+    owner: String
+    sharedBy: String
+    tag: String
+    suggestedTag: String
+}
+
+enum FilterArticleEnum {
+    ID
+    URL
+    OWNER
+    SHARED_BY
+    TAG
+    SUGGESTED_TAG
+}
+
+type Article {
+    id: ID!
+    url: String!
+    owner: String!
+    sharedBy: String
+    tags: [String]
+    suggestedTags: [String]
+}

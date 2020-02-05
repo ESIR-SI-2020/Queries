@@ -1,7 +1,8 @@
 package com.jxc.readapis.services;
-
-import fr.esir.jxc.domain.models.User;
 import com.jxc.readapis.dto.UserInfosDTO;
+import fr.esir.jxc.domain.models.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -25,8 +26,7 @@ public interface UserService {
      * Method to find all {@link User}
      * @return a list that contains all {@link User}
      */
-    List<User> findAllUsers();
-
+    Page<UserInfosDTO> findAllUsers(Pageable page);
 
     /**
      * Method to list all the friends of a {@link User}

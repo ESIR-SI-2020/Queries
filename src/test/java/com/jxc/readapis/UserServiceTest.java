@@ -1,11 +1,11 @@
 package com.jxc.readapis;
 
-import fr.esir.jxc.domain.models.Address;
-import fr.esir.jxc.domain.models.Article;
-import fr.esir.jxc.domain.models.User;
 import com.jxc.readapis.dto.UserInfosDTO;
 import com.jxc.readapis.exceptions.UserNotFoundException;
 import com.jxc.readapis.services.UserService;
+import fr.esir.jxc.domain.models.Address;
+import fr.esir.jxc.domain.models.Article;
+import fr.esir.jxc.domain.models.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,11 +15,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = ReadapisApplication.class)
@@ -134,25 +134,6 @@ public class UserServiceTest {
         assertEquals(friend.getEmail(), user0.getEmail());
         assertEquals(friend.getUsername(), user0.getUsername());
         assertEquals(friend.getAddress(), user0.getAddress());
-
-    }
-
-    @Test
-    public void testFindAllUsers() {
-
-        List<User> userList = new ArrayList<>();
-        userList.add(user2);
-        userList.add(user3);
-
-        userService.save(user2);
-        userService.save(user3);
-
-        List<User> userListTest = userService.findAllUsers();
-
-        assertEquals(userList.size(), userListTest.size());
-
-        assertTrue(userListTest.contains(user2));
-        assertTrue(userListTest.contains(user3));
 
     }
 
