@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
-public class UserAnalyticsServiceImpl implements UserAnalyticsService {
+public class  UserAnalyticsServiceImpl implements UserAnalyticsService {
 
     @Autowired
     private ElasticsearchOperations elasticsearchTemplate;
