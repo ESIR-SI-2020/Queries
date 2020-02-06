@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/analytics", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/analytics/users", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class UserAnalyticsController {
 
     private UserAnalyticsService userAnalyticsService;
@@ -53,7 +53,7 @@ public class UserAnalyticsController {
        return (UserAdded) userAnalyticsService.getBySpecificDate(date);
     }
 
-    @PostMapping("/deleteuseradded/{id}")
+    @PostMapping("/deleteUserAdded/{id}")
     public ResponseEntity<HttpStatus> deleteUserAdded(@PathVariable String id) {
         UserAdded userAdded = userAnalyticsService.getUserAddedById(id);
 
