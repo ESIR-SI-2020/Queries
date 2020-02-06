@@ -2,41 +2,30 @@ package com.jxc.readapis.services;
 
 import fr.esir.jxc.domain.models.analytics.UserAdded;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 public interface UserAnalyticsService {
 
-    /**
-     * Method to save a {@link UserAdded} (for testing purpose)
-     * @param userAdded
-     * @return
-     */
-    UserAdded save(UserAdded userAdded);
 
-    /**
-     * Method to delete {@link UserAdded}
-     * @param userAdded
-     * @return documentId of the document deleted
-     */
+    UserAdded newUserAdded(UserAdded userAdded);
+
+    UserAdded getUserAddedById(String id);
+
+    List<UserAdded>  getAllUserAdded();
+
+    int numberOfUserAdded();
+
+    UserAdded getBySpecificDate(String date);
+
     String delete(UserAdded userAdded);
 
-    /**
-     * @param id
-     * @return the userAdded corresponding to the specified id
-     */
-    UserAdded findOneById(String id);
+  //  List<UserAdded> findAllUserAddedByDateInterval(Long dateDebut, Long dateFin);
 
-    /**
-     * @return a list that contains all {@link UserAdded}
-     */
-    List<UserAdded> findAllUserAdded();
+   // List<UserAdded> findAllUserAddedByDateInterval(Long dateDebut, Long dateFin);
 
-    /**
-     * @param dateDebut
-     * @param dateFin
-     * @return a list of {@link UserAdded} created on the date passed in parameters
-     */
-    List<UserAdded> findAllUserAddedByDateInterval(Long dateDebut, Long dateFin);
+   // String delete(UserAdded userAdded);
 
 }

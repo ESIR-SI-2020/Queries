@@ -1,62 +1,95 @@
 package com.jxc.readapis.services;
 
 import fr.esir.jxc.domain.models.analytics.UserAdded;
+import org.elasticsearch.action.search.SearchResponse;
+import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.query.IndexQueryBuilder;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
-import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
+import org.elasticsearch.client.Client;
+import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
 
-@Service
+import java.util.*;
+
+@Repository
 public class  UserAnalyticsServiceImpl implements UserAnalyticsService {
 
+    private final Logger LOG = LoggerFactory.getLogger(getClass());
+
+   /* @Value("${elasticsearch.index.name}")
+    private String indexName;
+
+    @Value("${elasticsearch.user.type}")
+    private String userTypeName;*/
+
     @Autowired
-    private ElasticsearchOperations elasticsearchTemplate;
+    private ElasticsearchTemplate esTemplate;
 
     @Override
-    public UserAdded save(UserAdded userAdded) {
-        Assert.notNull(userAdded, "Cannot save null entity.");
+    public UserAdded newUserAdded(UserAdded userAdded) {
+        IndexQuery userQuery = new IndexQuery();
+        userQuery.setIndexName("pocket");
+        userQuery.setType("user_added");
+        userQuery.setObject(userAdded);
 
-        this.elasticsearchTemplate.putMapping(UserAdded.class);
-        this.elasticsearchTemplate.index(new IndexQueryBuilder().withObject(userAdded).build());
-        this.elasticsearchTemplate.refresh(UserAdded.class);
+        LOG.info("user_added indexed: {}", esTemplate.index(userQuery));
+        esTemplate.refresh("pocket");
 
         return userAdded;
     }
 
-    public String delete(UserAdded userAdded) {
-        return this.elasticsearchTemplate.delete(UserAdded.class, userAdded.getId());
+    @Override
+    public UserAdded getUserAddedById(String id) {
+        SearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withIndices("pocket").withTypes("user_added")
+                .withFilter(QueryBuilders.matchQuery("id", id)).build();
+        List<UserAdded> userAdded = esTemplate.queryForList(searchQuery, UserAdded.class);
+        if(!userAdded.isEmpty()) {
+            return userAdded.get(0);
+        }
+        return null;
     }
-
-
-    public UserAdded findOneById(String id) {
-        Collection<String> ids = new ArrayList<String>();
-        ids.add(id);
-        SearchQuery searchQuery = new NativeSearchQueryBuilder().withIds(ids).build();
-        List<UserAdded> result = this.elasticsearchTemplate.queryForList(searchQuery, UserAdded.class);
-
-        return result.get(0);
-    }
-
-    public List<UserAdded> findAllUserAdded() {
-        SearchQuery searchQuery = new NativeSearchQueryBuilder().build();
-        return this.elasticsearchTemplate.queryForList(searchQuery, UserAdded.class);
-    }
-
 
     @Override
-    public List<UserAdded> findAllUserAddedByDateInterval(Long dateDebut, Long dateFin) {
-        SearchQuery searchQuery = new NativeSearchQueryBuilder()
-                .withQuery(QueryBuilders.rangeQuery("creationDate").gte(dateDebut).lte(dateFin))
-                .build();
+    public List<UserAdded> getAllUserAdded() {
+        SearchQuery getAllQuery = new NativeSearchQueryBuilder()
+                .withIndices("pocket").withTypes("user_added")
+                .withQuery(matchAllQuery()).build();
+        return esTemplate.queryForList(getAllQuery, UserAdded.class);
+    }
 
-        return this.elasticsearchTemplate.queryForList(searchQuery, UserAdded.class);
+    @Override
+    public  int numberOfUserAdded(){
+        SearchQuery getAllQuery = new NativeSearchQueryBuilder()
+                .withIndices("pocket").withTypes("user_added")
+                .withQuery(matchAllQuery()).build();
+        List<UserAdded> userAdded =  esTemplate.queryForList(getAllQuery, UserAdded.class);
+
+        return userAdded.size();
+    }
+
+    public UserAdded getBySpecificDate(String date) {
+        SearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withIndices("pocket").withTypes("user_added")
+                .withQuery(QueryBuilders.matchQuery("creationDate", date))
+                .build();
+        List<UserAdded> userAdded = esTemplate.queryForList(searchQuery, UserAdded.class);
+        if (!userAdded.isEmpty()) {
+            return userAdded.get(0);
+        }
+        return null;
+    }
+
+    public String delete(UserAdded userAdded) {
+        return esTemplate.delete(UserAdded.class, userAdded.getId());
     }
 }
