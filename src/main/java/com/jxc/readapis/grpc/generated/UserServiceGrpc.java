@@ -61,9 +61,6 @@ public final class UserServiceGrpc {
   public static abstract class UserServiceImplBase implements io.grpc.BindableService {
 
     /**
-     * <pre>
-     *rpc findAllUsers(google.protobuf.Empty) returns (stream UserInfosDTO);
-     * </pre>
      */
     public void findUserByEmail(com.jxc.readapis.grpc.UserRequest request,
         io.grpc.stub.StreamObserver<com.jxc.readapis.grpc.UserInfosDTO> responseObserver) {
@@ -102,9 +99,6 @@ public final class UserServiceGrpc {
     }
 
     /**
-     * <pre>
-     *rpc findAllUsers(google.protobuf.Empty) returns (stream UserInfosDTO);
-     * </pre>
      */
     public void findUserByEmail(com.jxc.readapis.grpc.UserRequest request,
         io.grpc.stub.StreamObserver<com.jxc.readapis.grpc.UserInfosDTO> responseObserver) {
@@ -132,9 +126,6 @@ public final class UserServiceGrpc {
     }
 
     /**
-     * <pre>
-     *rpc findAllUsers(google.protobuf.Empty) returns (stream UserInfosDTO);
-     * </pre>
      */
     public com.jxc.readapis.grpc.UserInfosDTO findUserByEmail(com.jxc.readapis.grpc.UserRequest request) {
       return blockingUnaryCall(
@@ -161,9 +152,6 @@ public final class UserServiceGrpc {
     }
 
     /**
-     * <pre>
-     *rpc findAllUsers(google.protobuf.Empty) returns (stream UserInfosDTO);
-     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.jxc.readapis.grpc.UserInfosDTO> findUserByEmail(
         com.jxc.readapis.grpc.UserRequest request) {

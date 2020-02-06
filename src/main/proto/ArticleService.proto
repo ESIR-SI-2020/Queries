@@ -1,10 +1,13 @@
 syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "com.jxc.readapis.grpc";
-import "google/protobuf/empty.proto";
 
-message ArticleRequest {
+message ArticleRequestId {
     string id = 1;
+}
+
+message ArticleRequestOwner {
+    string owner = 1;
 }
 
 message Article {
@@ -16,7 +19,11 @@ message Article {
     repeated string suggestedTags = 6;
 }
 
+message ArticleList {
+    repeated Article article = 1;
+}
+
 service ArticleService {
-    rpc findArticleByID(ArticleRequest) returns (Article);
-    //rpc findAllArticles(google.protobuf.Empty) returns (stream Article);
+    rpc findArticleByID(ArticleRequestId) returns (Article);
+    rpc findArticlesByOwner(ArticleRequestOwner) returns (ArticleList);
 }

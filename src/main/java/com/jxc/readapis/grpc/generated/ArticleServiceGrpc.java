@@ -21,16 +21,28 @@ public final class ArticleServiceGrpc {
 
   // Static method descriptors that strictly reflect the proto.
   @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
-  public static final io.grpc.MethodDescriptor<com.jxc.readapis.grpc.ArticleRequest,
+  public static final io.grpc.MethodDescriptor<com.jxc.readapis.grpc.ArticleRequestId,
       com.jxc.readapis.grpc.Article> METHOD_FIND_ARTICLE_BY_ID =
-      io.grpc.MethodDescriptor.<com.jxc.readapis.grpc.ArticleRequest, com.jxc.readapis.grpc.Article>newBuilder()
+      io.grpc.MethodDescriptor.<com.jxc.readapis.grpc.ArticleRequestId, com.jxc.readapis.grpc.Article>newBuilder()
           .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
           .setFullMethodName(generateFullMethodName(
               "ArticleService", "findArticleByID"))
           .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-              com.jxc.readapis.grpc.ArticleRequest.getDefaultInstance()))
+              com.jxc.readapis.grpc.ArticleRequestId.getDefaultInstance()))
           .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
               com.jxc.readapis.grpc.Article.getDefaultInstance()))
+          .build();
+  @io.grpc.ExperimentalApi("https://github.com/grpc/grpc-java/issues/1901")
+  public static final io.grpc.MethodDescriptor<com.jxc.readapis.grpc.ArticleRequestOwner,
+      com.jxc.readapis.grpc.ArticleList> METHOD_FIND_ARTICLES_BY_OWNER =
+      io.grpc.MethodDescriptor.<com.jxc.readapis.grpc.ArticleRequestOwner, com.jxc.readapis.grpc.ArticleList>newBuilder()
+          .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+          .setFullMethodName(generateFullMethodName(
+              "ArticleService", "findArticlesByOwner"))
+          .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              com.jxc.readapis.grpc.ArticleRequestOwner.getDefaultInstance()))
+          .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+              com.jxc.readapis.grpc.ArticleList.getDefaultInstance()))
           .build();
 
   /**
@@ -61,13 +73,17 @@ public final class ArticleServiceGrpc {
   public static abstract class ArticleServiceImplBase implements io.grpc.BindableService {
 
     /**
-     * <pre>
-     *rpc findAllArticles(google.protobuf.Empty) returns (stream Article);
-     * </pre>
      */
-    public void findArticleByID(com.jxc.readapis.grpc.ArticleRequest request,
+    public void findArticleByID(com.jxc.readapis.grpc.ArticleRequestId request,
         io.grpc.stub.StreamObserver<com.jxc.readapis.grpc.Article> responseObserver) {
       asyncUnimplementedUnaryCall(METHOD_FIND_ARTICLE_BY_ID, responseObserver);
+    }
+
+    /**
+     */
+    public void findArticlesByOwner(com.jxc.readapis.grpc.ArticleRequestOwner request,
+        io.grpc.stub.StreamObserver<com.jxc.readapis.grpc.ArticleList> responseObserver) {
+      asyncUnimplementedUnaryCall(METHOD_FIND_ARTICLES_BY_OWNER, responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
@@ -76,9 +92,16 @@ public final class ArticleServiceGrpc {
             METHOD_FIND_ARTICLE_BY_ID,
             asyncUnaryCall(
               new MethodHandlers<
-                com.jxc.readapis.grpc.ArticleRequest,
+                com.jxc.readapis.grpc.ArticleRequestId,
                 com.jxc.readapis.grpc.Article>(
                   this, METHODID_FIND_ARTICLE_BY_ID)))
+          .addMethod(
+            METHOD_FIND_ARTICLES_BY_OWNER,
+            asyncUnaryCall(
+              new MethodHandlers<
+                com.jxc.readapis.grpc.ArticleRequestOwner,
+                com.jxc.readapis.grpc.ArticleList>(
+                  this, METHODID_FIND_ARTICLES_BY_OWNER)))
           .build();
     }
   }
@@ -102,14 +125,19 @@ public final class ArticleServiceGrpc {
     }
 
     /**
-     * <pre>
-     *rpc findAllArticles(google.protobuf.Empty) returns (stream Article);
-     * </pre>
      */
-    public void findArticleByID(com.jxc.readapis.grpc.ArticleRequest request,
+    public void findArticleByID(com.jxc.readapis.grpc.ArticleRequestId request,
         io.grpc.stub.StreamObserver<com.jxc.readapis.grpc.Article> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(METHOD_FIND_ARTICLE_BY_ID, getCallOptions()), request, responseObserver);
+    }
+
+    /**
+     */
+    public void findArticlesByOwner(com.jxc.readapis.grpc.ArticleRequestOwner request,
+        io.grpc.stub.StreamObserver<com.jxc.readapis.grpc.ArticleList> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(METHOD_FIND_ARTICLES_BY_OWNER, getCallOptions()), request, responseObserver);
     }
   }
 
@@ -132,13 +160,17 @@ public final class ArticleServiceGrpc {
     }
 
     /**
-     * <pre>
-     *rpc findAllArticles(google.protobuf.Empty) returns (stream Article);
-     * </pre>
      */
-    public com.jxc.readapis.grpc.Article findArticleByID(com.jxc.readapis.grpc.ArticleRequest request) {
+    public com.jxc.readapis.grpc.Article findArticleByID(com.jxc.readapis.grpc.ArticleRequestId request) {
       return blockingUnaryCall(
           getChannel(), METHOD_FIND_ARTICLE_BY_ID, getCallOptions(), request);
+    }
+
+    /**
+     */
+    public com.jxc.readapis.grpc.ArticleList findArticlesByOwner(com.jxc.readapis.grpc.ArticleRequestOwner request) {
+      return blockingUnaryCall(
+          getChannel(), METHOD_FIND_ARTICLES_BY_OWNER, getCallOptions(), request);
     }
   }
 
@@ -161,18 +193,24 @@ public final class ArticleServiceGrpc {
     }
 
     /**
-     * <pre>
-     *rpc findAllArticles(google.protobuf.Empty) returns (stream Article);
-     * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<com.jxc.readapis.grpc.Article> findArticleByID(
-        com.jxc.readapis.grpc.ArticleRequest request) {
+        com.jxc.readapis.grpc.ArticleRequestId request) {
       return futureUnaryCall(
           getChannel().newCall(METHOD_FIND_ARTICLE_BY_ID, getCallOptions()), request);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<com.jxc.readapis.grpc.ArticleList> findArticlesByOwner(
+        com.jxc.readapis.grpc.ArticleRequestOwner request) {
+      return futureUnaryCall(
+          getChannel().newCall(METHOD_FIND_ARTICLES_BY_OWNER, getCallOptions()), request);
     }
   }
 
   private static final int METHODID_FIND_ARTICLE_BY_ID = 0;
+  private static final int METHODID_FIND_ARTICLES_BY_OWNER = 1;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -192,8 +230,12 @@ public final class ArticleServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_FIND_ARTICLE_BY_ID:
-          serviceImpl.findArticleByID((com.jxc.readapis.grpc.ArticleRequest) request,
+          serviceImpl.findArticleByID((com.jxc.readapis.grpc.ArticleRequestId) request,
               (io.grpc.stub.StreamObserver<com.jxc.readapis.grpc.Article>) responseObserver);
+          break;
+        case METHODID_FIND_ARTICLES_BY_OWNER:
+          serviceImpl.findArticlesByOwner((com.jxc.readapis.grpc.ArticleRequestOwner) request,
+              (io.grpc.stub.StreamObserver<com.jxc.readapis.grpc.ArticleList>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -229,6 +271,7 @@ public final class ArticleServiceGrpc {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
               .setSchemaDescriptor(new ArticleServiceDescriptorSupplier())
               .addMethod(METHOD_FIND_ARTICLE_BY_ID)
+              .addMethod(METHOD_FIND_ARTICLES_BY_OWNER)
               .build();
         }
       }
