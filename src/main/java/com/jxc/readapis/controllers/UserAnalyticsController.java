@@ -3,8 +3,6 @@ package com.jxc.readapis.controllers;
 import com.jxc.readapis.dto.Count;
 import com.jxc.readapis.services.UserAnalyticsService;
 import fr.esir.jxc.domain.models.analytics.UserAdded;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,31 +21,40 @@ public class UserAnalyticsController {
         this.userAnalyticsService = service;
     }
 
-    @GetMapping("/all")
-    public List<UserAdded> getAllUsers() {
-        return userAnalyticsService.getAllUserAdded();
+    @RequestMapping(value = "/")
+    public ResponseEntity<List<UserAdded>> getAllUsers() {
+        return new ResponseEntity<>(userAnalyticsService.getAllUserAdded(), HttpStatus.OK);
     }
 
-    @RequestMapping("/id/{userId}")
-    public UserAdded getUser(@PathVariable String userId) {
+    @RequestMapping(value = "/{userId}")
+    public  ResponseEntity<UserAdded> getUser(@PathVariable String userId) {
         UserAdded userAdded = userAnalyticsService.getUserAddedById(userId);
-        return userAdded;
+        return new ResponseEntity<>(userAdded, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public UserAdded addNewUsers(@RequestBody UserAdded userAdded) {
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public ResponseEntity<UserAdded> addNewUsers(@RequestBody UserAdded userAdded) {
         userAnalyticsService.newUserAdded(userAdded);
-        return userAdded;
+        return new ResponseEntity<>(userAdded, HttpStatus.CREATED);
     }
 
-    @GetMapping (value = "/numberUserAdded")
-    public int numberUserAdded() {
-        return userAnalyticsService.numberOfUserAdded();
+    @RequestMapping (value = "/numberOfUserAdded")
+    public ResponseEntity<Count> numberUserAdded() {
+        Count nbOfUserAdded =  new Count(userAnalyticsService.numberOfUserAdded());
+        return new ResponseEntity<>(nbOfUserAdded, HttpStatus.OK);
     }
 
-    @RequestMapping("/date/{date}")
-    public List<UserAdded> getUserDate(@PathVariable String date) {
-       return userAnalyticsService.getBySpecificDate(date);
+    @RequestMapping(value = "", params = "date")
+    @ResponseBody
+    public ResponseEntity<List<UserAdded>> getUserDate(@RequestParam("date") String date) {
+       return new ResponseEntity<>(userAnalyticsService.getBySpecificDate(date), HttpStatus.OK);
+    }
+
+    @RequestMapping (value = "/numberOfUserAdded", params = "date")
+    @ResponseBody
+    public ResponseEntity<Count> numberUserAddedAtDate(@RequestParam("date") String date) {
+        Count nbOfUserAddedAtDate =  new Count(userAnalyticsService.getBySpecificDate(date).size());
+        return new ResponseEntity<>(nbOfUserAddedAtDate, HttpStatus.OK);
     }
 
 }

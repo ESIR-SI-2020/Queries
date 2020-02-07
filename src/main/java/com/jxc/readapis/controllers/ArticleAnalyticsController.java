@@ -3,18 +3,12 @@ package com.jxc.readapis.controllers;
 import com.jxc.readapis.dto.Count;
 import com.jxc.readapis.services.ArticleAnalyticsService;
 import fr.esir.jxc.domain.models.analytics.ArticleAdded;
-import fr.esir.jxc.domain.models.analytics.UserAdded;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -27,30 +21,39 @@ public class ArticleAnalyticsController {
         this.articleAnalyticsService = service;
     }
 
-    @GetMapping("/all")
-    public List<ArticleAdded> getAllArticles() {
-        return articleAnalyticsService.getAllArticleAdded();
+    @RequestMapping("/")
+    public ResponseEntity<List<ArticleAdded>> getAllArticles() {
+        return new ResponseEntity<>(articleAnalyticsService.getAllArticleAdded(), HttpStatus.OK);
     }
 
-    @RequestMapping("/id/{articleId}")
-    public ArticleAdded getArticle(@PathVariable String articleId) {
+    @RequestMapping("/{articleId}")
+    public ResponseEntity<ArticleAdded> getArticle(@PathVariable String articleId) {
         ArticleAdded articleAdded = articleAnalyticsService.getArticleAddedById(articleId);
-        return articleAdded;
+        return new ResponseEntity<>(articleAdded, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/new", method = RequestMethod.POST)
-    public ArticleAdded addNewArticles(@RequestBody ArticleAdded articleAdded) {
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public ResponseEntity<ArticleAdded> addNewArticles(@RequestBody ArticleAdded articleAdded) {
         articleAnalyticsService.newArticleAdded(articleAdded);
-        return articleAdded;
+        return new ResponseEntity<>(articleAdded, HttpStatus.CREATED);
     }
 
-    @GetMapping (value = "/numberArticleAdded")
-    public int numberArticleAdded() {
-        return articleAnalyticsService.numberOfArticleAdded();
+    @RequestMapping (value = "/numberOfArticleAdded")
+    public ResponseEntity<Count> numberArticleAdded() {
+        Count nbOfArticleAdded =  new Count(articleAnalyticsService.numberOfArticleAdded());
+        return new ResponseEntity<>(nbOfArticleAdded, HttpStatus.OK);
     }
 
-    @RequestMapping("/date/{date}")
-    public List<ArticleAdded> getArticleDate(@PathVariable String date) {
-        return  articleAnalyticsService.getBySpecificDate(date);
+    @RequestMapping(value = "", params = "date")
+    @ResponseBody
+    public ResponseEntity<List<ArticleAdded>> getArticleDate(@RequestParam("date") String date) {
+        return new ResponseEntity<>(articleAnalyticsService.getBySpecificDate(date), HttpStatus.OK);
+    }
+
+    @RequestMapping (value = "/numberOfUserAdded", params = "date")
+    @ResponseBody
+    public ResponseEntity<Count> numberArticleAddedAtDate(@RequestParam("date") String date) {
+        Count nbOfArticleAddedAtDate =  new Count(articleAnalyticsService.getBySpecificDate(date).size());
+        return new ResponseEntity<>(nbOfArticleAddedAtDate, HttpStatus.OK);
     }
 }
