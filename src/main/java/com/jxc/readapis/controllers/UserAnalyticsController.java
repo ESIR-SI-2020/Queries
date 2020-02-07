@@ -53,16 +53,4 @@ public class UserAnalyticsController {
        return (UserAdded) userAnalyticsService.getBySpecificDate(date);
     }
 
-    @PostMapping("/deleteUserAdded/{id}")
-    public ResponseEntity<HttpStatus> deleteUserAdded(@PathVariable String id) {
-        UserAdded userAdded = userAnalyticsService.getUserAddedById(id);
-
-        String documentId = userAnalyticsService.delete(userAdded);
-        if(documentId != null) {
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
 }

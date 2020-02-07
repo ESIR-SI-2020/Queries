@@ -1,19 +1,14 @@
 package com.jxc.readapis.services;
 
 import fr.esir.jxc.domain.models.analytics.ArticleAdded;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.search.SearchHit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
-import org.elasticsearch.client.Client;
 import org.springframework.stereotype.Repository;
 
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
@@ -83,7 +78,4 @@ public class  ArticleAnalyticsServiceImpl implements ArticleAnalyticsService {
         return null;
     }
 
-    public String delete(ArticleAdded articleAdded) {
-        return esTemplate.delete(ArticleAdded.class, articleAdded.getId());
-    }
 }

@@ -20,12 +20,4 @@ public interface UserAnalyticsService {
 
     UserAdded getBySpecificDate(String date);
 
-    String delete(UserAdded userAdded);
-
-  //  List<UserAdded> findAllUserAddedByDateInterval(Long dateDebut, Long dateFin);
-
-   // List<UserAdded> findAllUserAddedByDateInterval(Long dateDebut, Long dateFin);
-
-   // String delete(UserAdded userAdded);
-
 }

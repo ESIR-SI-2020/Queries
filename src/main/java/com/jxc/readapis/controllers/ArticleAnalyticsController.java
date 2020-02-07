@@ -53,16 +53,4 @@ public class ArticleAnalyticsController {
         return (ArticleAdded) articleAnalyticsService.getBySpecificDate(date);
     }
 
-    @PostMapping("/deleteArticleAdded/{id}")
-    public ResponseEntity<HttpStatus> deleteArticleAdded(@PathVariable String id) {
-        ArticleAdded articleAdded = articleAnalyticsService.getArticleAddedById(id);
-
-        String documentId = articleAnalyticsService.delete(articleAdded);
-        if(documentId != null) {
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
 }

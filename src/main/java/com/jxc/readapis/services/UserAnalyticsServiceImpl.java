@@ -25,12 +25,6 @@ public class  UserAnalyticsServiceImpl implements UserAnalyticsService {
 
     private final Logger LOG = LoggerFactory.getLogger(getClass());
 
-   /* @Value("${elasticsearch.index.name}")
-    private String indexName;
-
-    @Value("${elasticsearch.user.type}")
-    private String userTypeName;*/
-
     @Autowired
     private ElasticsearchTemplate esTemplate;
 
@@ -89,7 +83,4 @@ public class  UserAnalyticsServiceImpl implements UserAnalyticsService {
         return null;
     }
 
-    public String delete(UserAdded userAdded) {
-        return esTemplate.delete(UserAdded.class, userAdded.getId());
-    }
 }

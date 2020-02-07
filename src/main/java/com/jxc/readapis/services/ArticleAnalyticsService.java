@@ -20,6 +20,4 @@ public interface ArticleAnalyticsService {
 
     ArticleAdded getBySpecificDate(String date);
 
-    String delete(ArticleAdded articleAdded);
-
 }
