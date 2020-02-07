@@ -19,7 +19,7 @@ http://localhost:9200/pocket/demo_article/_search/
 
 
 # Create analytics users using our API
-http://localhost:8082/api/v1/usersAnalytics/users/create
+http://localhost:8082/api/v1/usersAnalytics/create
 
     {
         "id": "001",
