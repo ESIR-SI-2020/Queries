@@ -11,11 +11,11 @@ import java.util.Optional;
 public interface ArticleService {
 
     /**
-    * Method to save a {@link User}, only here for testing purpose
-    * @param user The {@link User} to save
-    * @return The user saved
+    * Method to save a {@link Article}
+    * @param article The {@link Article} to save
+    * @return The article saved
     */
-    User save(User user);
+    ArticleConsultationDTO save(Article article);
     /**
      * Method to find an Article by its url
      * @param id
