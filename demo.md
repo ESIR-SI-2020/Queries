@@ -1,13 +1,13 @@
 # ElasticSearch config
 
-Index = pocket
+IndexName = pocket
 
 Type_user = demo_user
 Type_article = demo_article
 
 # Create document using elasticsearch API
 
-### Create
+### Create 
 
 http://localhost:9200/pocket/demo_user/id
 http://localhost:9200/pocket/demo_article/id
