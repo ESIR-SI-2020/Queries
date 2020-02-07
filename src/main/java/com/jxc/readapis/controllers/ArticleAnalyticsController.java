@@ -9,10 +9,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/analytics/articles", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/articlesAnalytics", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class ArticleAnalyticsController {
 
     private ArticleAnalyticsService articleAnalyticsService;
@@ -46,13 +49,27 @@ public class ArticleAnalyticsController {
 
     @RequestMapping(value = "", params = "date")
     @ResponseBody
-    public ResponseEntity<List<ArticleAdded>> getArticleDate(@RequestParam("date") String date) {
+    public ResponseEntity getArticleDate(@RequestParam("date") String date) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("{\"Error\": \"Invalid parameter date\"}",HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(articleAnalyticsService.getBySpecificDate(date), HttpStatus.OK);
     }
 
     @RequestMapping (value = "/numberOfUserAdded", params = "date")
     @ResponseBody
-    public ResponseEntity<Count> numberArticleAddedAtDate(@RequestParam("date") String date) {
+    public ResponseEntity numberArticleAddedAtDate(@RequestParam("date") String date) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("{\"Error\": \"Invalid parameter date\"}",HttpStatus.BAD_REQUEST);
+        }
         Count nbOfArticleAddedAtDate =  new Count(articleAnalyticsService.getBySpecificDate(date).size());
         return new ResponseEntity<>(nbOfArticleAddedAtDate, HttpStatus.OK);
     }

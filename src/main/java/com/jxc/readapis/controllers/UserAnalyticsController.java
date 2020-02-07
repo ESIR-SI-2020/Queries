@@ -9,10 +9,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/analytics/users", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/v1/usersAnalytics", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class UserAnalyticsController {
 
     private UserAnalyticsService userAnalyticsService;
@@ -46,13 +49,27 @@ public class UserAnalyticsController {
 
     @RequestMapping(value = "", params = "date")
     @ResponseBody
-    public ResponseEntity<List<UserAdded>> getUserDate(@RequestParam("date") String date) {
-       return new ResponseEntity<>(userAnalyticsService.getBySpecificDate(date), HttpStatus.OK);
+    public ResponseEntity getUserDate(@RequestParam("date") String date) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("{\"Error\": \"Invalid parameter date\"}",HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(userAnalyticsService.getBySpecificDate(date), HttpStatus.OK);
     }
 
     @RequestMapping (value = "/numberOfUserAdded", params = "date")
     @ResponseBody
-    public ResponseEntity<Count> numberUserAddedAtDate(@RequestParam("date") String date) {
+    public ResponseEntity numberUserAddedAtDate(@RequestParam("date") String date) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            format.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("{\"Error\": \"Invalid parameter date\"}",HttpStatus.BAD_REQUEST);
+        }
         Count nbOfUserAddedAtDate =  new Count(userAnalyticsService.getBySpecificDate(date).size());
         return new ResponseEntity<>(nbOfUserAddedAtDate, HttpStatus.OK);
     }
