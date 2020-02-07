@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -34,5 +35,19 @@ public class ArticleController {
         } else {
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+    }
+
+    @GetMapping("/article/{articleId}")
+    public ResponseEntity<ArticleConsultationDTO> getArticleById(@PathVariable String articleId){
+        Optional<ArticleConsultationDTO> articleDto = articleService.getArticleById(articleId);
+        if(articleDto.isPresent()) return new ResponseEntity<>(articleDto.get(), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/{owner}")
+    public ResponseEntity<List<ArticleConsultationDTO>> getArticlesByOwner(@PathVariable String owner){
+        List<ArticleConsultationDTO> articles = this.articleService.getArticlesByOwner(owner);
+        if(articles.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return  new ResponseEntity<>(articles, HttpStatus.OK);
     }
 }

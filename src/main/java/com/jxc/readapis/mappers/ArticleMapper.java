@@ -7,11 +7,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ArticleMapper {
 
-    /**
-     * Method to convert a {@link User} to {@link UserInfosDTO}
-     * @return a {@link UserInfosDTO}
-     */
-    public ArticleConsultationDTO convertToArticleConsultationDTO(Article article){
-        return new ArticleConsultationDTO(article.getUrl(), article.getOwner(), article.getTags());
+    public static ArticleConsultationDTO mapArticleToArticleDTO(Article article){
+        return new ArticleConsultationDTO(article.getId(), article.getUrl(), article.getOwner(), article.getTags());
     }
 }
