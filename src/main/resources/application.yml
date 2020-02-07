@@ -1,0 +1,9 @@
+elasticsearch:
+  clustername: pocket
+  host: localhost
+  port: 9300
+  home: /usr/share/elastic-search5.6.0
+  indexName: pocket
+  path:
+    logs: /usr/share/elasticsearch/logs
+    data: /usr/share/elasticsearch/data

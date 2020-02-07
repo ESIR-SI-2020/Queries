@@ -1,6 +1,7 @@
 package com.jxc.readapis.grpc.mappers;
 
 
+import com.jxc.readapis.dto.ArticleInfosDTO;
 import com.jxc.readapis.grpc.Article;
 import lombok.experimental.UtilityClass;
 import org.springframework.util.CollectionUtils;
@@ -22,4 +23,6 @@ public class ArticleMapper {
                 .setSharedBy(article.getSharedBy())
                 .build();
     }
+
+
 }

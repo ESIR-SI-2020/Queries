@@ -1,5 +1,6 @@
 package com.jxc.readapis.services;
 
+import com.jxc.readapis.dto.ArticleInfosDTO;
 import com.jxc.readapis.dto.UserInfosDTO;
 import fr.esir.jxc.domain.models.User;
 import org.springframework.data.domain.Page;

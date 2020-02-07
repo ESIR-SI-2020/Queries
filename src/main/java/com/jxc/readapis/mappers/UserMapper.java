@@ -1,6 +1,7 @@
 package com.jxc.readapis.mappers;
 
 import com.jxc.readapis.dto.UserInfosDTO;
+
 import fr.esir.jxc.domain.models.User;
 import lombok.experimental.UtilityClass;
 

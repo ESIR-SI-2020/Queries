@@ -4,6 +4,7 @@ import com.jxc.readapis.dto.UserInfosDTO;
 import com.jxc.readapis.exceptions.UserNotFoundException;
 import com.jxc.readapis.mappers.UserMapper;
 import fr.esir.jxc.domain.models.User;
+import fr.esir.jxc.elasticsearch.repositories.ArticleRepository;
 import fr.esir.jxc.elasticsearch.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,6 +22,8 @@ public class UserServiceImp implements UserService {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    ArticleRepository articleRepository;
 
     public User save(User user){
         return userRepository.save(user);
@@ -50,5 +53,7 @@ public class UserServiceImp implements UserService {
         });
         return friends;
     }
+
+
 
 }

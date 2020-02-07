@@ -20,7 +20,7 @@ import java.util.Collections;
 @SpringBootApplication
 @ComponentScan({
         "fr.esir.jxc.elasticsearch",
-        "com.jxc.readapis"
+        "com.jxc.readapis",
 })
 public class ReadapisApplication implements CommandLineRunner {
 
@@ -54,11 +54,13 @@ public class ReadapisApplication implements CommandLineRunner {
         final Article article0 = new Article("article0", "url0", "user0", "", new ArrayList<>(), new ArrayList<>());
         final Article article1 = new Article("article1", "url1", "user1", "", Arrays.asList("tag1", "tag2"), new ArrayList<>());
         final Article article2 = new Article("article2", "url2", "user2", "user4", Arrays.asList("tag2", "tag2bis"), Arrays.asList("suggestedTag2", "suggestedTag2bis"));
-        final Article article3 = new Article("article3", "url3", "user3", "", Collections.singletonList("tag3"), new ArrayList<>());
+        final Article article3 = new Article("article3", "url3", "user3", "user4", Arrays.asList("tag2", "tag2bis"), Arrays.asList("suggestedTag2", "suggestedTag2bis"));
+        final Article article4 = new Article("article4", "url4", "user4", "user4", Collections.singletonList("tag3"), new ArrayList<>());
 
         articleRepository.save(article0);
         articleRepository.save(article1);
         articleRepository.save(article2);
         articleRepository.save(article3);
+        articleRepository.save(article4);
     }
 }
