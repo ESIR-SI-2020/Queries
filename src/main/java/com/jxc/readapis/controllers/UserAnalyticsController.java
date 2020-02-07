@@ -39,8 +39,8 @@ public class UserAnalyticsController {
     public ResponseEntity<Count> getNbOfUsersCreatedToday() {
         LocalDate localDate = LocalDate.now();
 
-        Long dateDebut = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime();
-        Long dateFin = Date.from(localDate.atTime(23, 59, 59).atZone(ZoneId.systemDefault()).toInstant()).getTime();
+        Date dateDebut = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        Date dateFin = Date.from(localDate.atTime(23, 59, 59).atZone(ZoneId.systemDefault()).toInstant());
 
         List<UserAdded> userAddedTodayList = userAnalyticsService.findAllUserAddedByDateInterval(dateDebut, dateFin);
 

@@ -31,9 +31,9 @@ public class UserAnalyticsServiceTest {
     @Autowired
     private ElasticsearchTemplate esTemplate;
 
-    private final UserAdded userAdded1 = new UserAdded("01", Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime());
-    private final UserAdded userAdded2 = new UserAdded("02", Date.from(LocalDate.of(2019, Month.DECEMBER, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime());
-    private final UserAdded userAdded3 = new UserAdded("03", Date.from(LocalDate.of(2019, Month.JANUARY, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime());
+    private final UserAdded userAdded1 = new UserAdded("01", Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+    private final UserAdded userAdded2 = new UserAdded("02", Date.from(LocalDate.of(2019, Month.DECEMBER, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+    private final UserAdded userAdded3 = new UserAdded("03", Date.from(LocalDate.of(2019, Month.JANUARY, 1).atStartOfDay(ZoneId.systemDefault()).toInstant()));
 
     @Before
     public void before() {
@@ -82,7 +82,7 @@ public class UserAnalyticsServiceTest {
     @Test
     public void testFindAllUserAddedByDate() {
         LocalDate localDate = LocalDate.now();
-        Long dateDebut = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime();
+        Date dateDebut = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
         List<UserAdded> userAddedList = new ArrayList<UserAdded>();
         userAddedList.add(userAdded1);

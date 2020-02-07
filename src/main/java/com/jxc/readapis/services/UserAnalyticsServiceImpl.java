@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -52,7 +53,7 @@ public class UserAnalyticsServiceImpl implements UserAnalyticsService {
 
 
     @Override
-    public List<UserAdded> findAllUserAddedByDateInterval(Long dateDebut, Long dateFin) {
+    public List<UserAdded> findAllUserAddedByDateInterval(Date dateDebut, Date dateFin) {
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(QueryBuilders.rangeQuery("creationDate").gte(dateDebut).lte(dateFin))
                 .build();

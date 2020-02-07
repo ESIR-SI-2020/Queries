@@ -2,6 +2,7 @@ package com.jxc.readapis.services;
 
 import fr.esir.jxc.domain.models.analytics.UserAdded;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -37,6 +38,6 @@ public interface UserAnalyticsService {
      * @param dateFin
      * @return a list of {@link UserAdded} created on the date passed in parameters
      */
-    List<UserAdded> findAllUserAddedByDateInterval(Long dateDebut, Long dateFin);
+    List<UserAdded> findAllUserAddedByDateInterval(Date dateDebut, Date dateFin);
 
 }
