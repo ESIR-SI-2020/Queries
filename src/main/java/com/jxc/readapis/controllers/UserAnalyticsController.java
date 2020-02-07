@@ -11,9 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -49,8 +46,8 @@ public class UserAnalyticsController {
     }
 
     @RequestMapping("/date/{date}")
-    public UserAdded getUserDate(@PathVariable String date) {
-       return (UserAdded) userAnalyticsService.getBySpecificDate(date);
+    public List<UserAdded> getUserDate(@PathVariable String date) {
+       return userAnalyticsService.getBySpecificDate(date);
     }
 
 }

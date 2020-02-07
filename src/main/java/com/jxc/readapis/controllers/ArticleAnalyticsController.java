@@ -3,6 +3,7 @@ package com.jxc.readapis.controllers;
 import com.jxc.readapis.dto.Count;
 import com.jxc.readapis.services.ArticleAnalyticsService;
 import fr.esir.jxc.domain.models.analytics.ArticleAdded;
+import fr.esir.jxc.domain.models.analytics.UserAdded;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +50,7 @@ public class ArticleAnalyticsController {
     }
 
     @RequestMapping("/date/{date}")
-    public ArticleAdded getArticleDate(@PathVariable String date) {
-        return (ArticleAdded) articleAnalyticsService.getBySpecificDate(date);
+    public List<ArticleAdded> getArticleDate(@PathVariable String date) {
+        return  articleAnalyticsService.getBySpecificDate(date);
     }
-
 }

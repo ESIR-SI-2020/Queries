@@ -2,9 +2,8 @@ package com.jxc.readapis.services;
 
 import fr.esir.jxc.domain.models.analytics.ArticleAdded;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
+
 
 
 public interface ArticleAnalyticsService {
@@ -18,6 +17,6 @@ public interface ArticleAnalyticsService {
 
     int numberOfArticleAdded();
 
-    ArticleAdded getBySpecificDate(String date);
+    List<ArticleAdded> getBySpecificDate(String date);
 
 }

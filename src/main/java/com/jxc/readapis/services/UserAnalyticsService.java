@@ -2,9 +2,7 @@ package com.jxc.readapis.services;
 
 import fr.esir.jxc.domain.models.analytics.UserAdded;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 
 public interface UserAnalyticsService {
@@ -18,6 +16,6 @@ public interface UserAnalyticsService {
 
     int numberOfUserAdded();
 
-    UserAdded getBySpecificDate(String date);
+    List<UserAdded> getBySpecificDate(String date);
 
 }

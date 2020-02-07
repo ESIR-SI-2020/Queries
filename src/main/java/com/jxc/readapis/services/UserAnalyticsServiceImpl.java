@@ -71,16 +71,12 @@ public class  UserAnalyticsServiceImpl implements UserAnalyticsService {
         return userAdded.size();
     }
 
-    public UserAdded getBySpecificDate(String date) {
+    public List<UserAdded> getBySpecificDate(String date) {
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withIndices("pocket").withTypes("user_added")
                 .withQuery(QueryBuilders.matchQuery("creationDate", date))
                 .build();
-        List<UserAdded> userAdded = esTemplate.queryForList(searchQuery, UserAdded.class);
-        if (!userAdded.isEmpty()) {
-            return userAdded.get(0);
-        }
-        return null;
+        return esTemplate.queryForList(searchQuery, UserAdded.class);
     }
 
 }

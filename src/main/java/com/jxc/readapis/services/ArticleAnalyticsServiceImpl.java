@@ -1,6 +1,7 @@
 package com.jxc.readapis.services;
 
 import fr.esir.jxc.domain.models.analytics.ArticleAdded;
+import fr.esir.jxc.domain.models.analytics.UserAdded;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,16 +67,11 @@ public class  ArticleAnalyticsServiceImpl implements ArticleAnalyticsService {
         return articleAdded.size();
     }
 
-    public ArticleAdded getBySpecificDate(String date) {
+    public List<ArticleAdded> getBySpecificDate(String date) {
         SearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withIndices("pocket").withTypes("article_added")
                 .withQuery(QueryBuilders.matchQuery("creationDate", date))
                 .build();
-        List<ArticleAdded> articleAdded = esTemplate.queryForList(searchQuery, ArticleAdded.class);
-        if (!articleAdded.isEmpty()) {
-            return articleAdded.get(0);
-        }
-        return null;
+        return esTemplate.queryForList(searchQuery, ArticleAdded.class);
     }
-
 }
