@@ -51,10 +51,10 @@ public class ReadapisApplication implements CommandLineRunner {
         userRepository.save(user2);
         userRepository.save(user3);
 
-        final Article article0 = new Article("article0", "url0", "user0", "", new ArrayList<>(), new ArrayList<>());
-        final Article article1 = new Article("article1", "url1", "user1", "", Arrays.asList("tag1", "tag2"), new ArrayList<>());
-        final Article article2 = new Article("article2", "url2", "user2", "user4", Arrays.asList("tag2", "tag2bis"), Arrays.asList("suggestedTag2", "suggestedTag2bis"));
-        final Article article3 = new Article("article3", "url3", "user3", "", Collections.singletonList("tag3"), new ArrayList<>());
+        final Article article0 = new Article("article0", "https://example.com", "user0", "", new ArrayList<>(), new ArrayList<>());
+        final Article article1 = new Article("article1", "https://example.com", "user1", "", Arrays.asList("tag1", "tag2"), new ArrayList<>());
+        final Article article2 = new Article("article2", "https://example.com", "user2", "user4", Arrays.asList("tag2", "tag2bis"), Arrays.asList("suggestedTag2", "suggestedTag2bis"));
+        final Article article3 = new Article("article3", "https://example.com", "user3", "", Collections.singletonList("tag3"), new ArrayList<>());
 
         articleRepository.save(article0);
         articleRepository.save(article1);

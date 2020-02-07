@@ -3,7 +3,6 @@ package com.jxc.readapis.grpc.mappers;
 
 import com.jxc.readapis.grpc.Article;
 import lombok.experimental.UtilityClass;
-import org.springframework.util.CollectionUtils;
 
 @UtilityClass
 public class ArticleMapper {
