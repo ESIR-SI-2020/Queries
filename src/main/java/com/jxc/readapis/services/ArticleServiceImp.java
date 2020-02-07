@@ -20,22 +20,18 @@ public class ArticleServiceImp implements ArticleService {
     @Autowired
     private EsArticleRepository articleRepository;
 
-<<<<<<< Updated upstream
-    @Override
+    public ArticleConsultationDTO save(Article article){
+        return ArticleMapper.mapArticleToArticleDTO(articleRepository.save(article));
+    }
+
     public List<ArticleConsultationDTO> getArticlesByOwner(String owner) {
         List<Article> articles = this.articleRepository.findArticlesByOwner(owner);
-=======
-    public ArticleConsultationDTO save(Article article){
-        return ArticleMapper.convertToArticleConsultationDTO(articleRepository.save(article));
-    }
->>>>>>> Stashed changes
 
         return articles.stream()
                     .map(article -> ArticleMapper.mapArticleToArticleDTO(article))
                     .collect(Collectors.toList());
     }
 
-    @Override
     public List<ArticleConsultationDTO> getAllArticles() {
         List<Article> articles = articleRepository.findAll();
         return articles.stream()
@@ -43,16 +39,9 @@ public class ArticleServiceImp implements ArticleService {
                 .collect(Collectors.toList());
     }
 
-<<<<<<< Updated upstream
-    @Override
     public Optional<ArticleConsultationDTO> getArticleById(String id) {
         return Optional.ofNullable(articleRepository.findArticleById(id))
             .map(article -> ArticleMapper.mapArticleToArticleDTO(article));
-=======
-
-    public ArticleConsultationDTO getArticleByUrl(String url) {
-        return ArticleMapper.convertToArticleConsultationDTO(articleRepository.findById(url).get());
->>>>>>> Stashed changes
     }
 
 }

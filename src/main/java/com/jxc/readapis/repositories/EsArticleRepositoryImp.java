@@ -21,7 +21,10 @@ public class EsArticleRepositoryImp implements EsArticleRepository {
     @Autowired
     private ElasticsearchOperations elasticsearchOperations;
 
-
+    @Override
+    public Article save(Article article){
+      return article;
+    }
     @Override
     public List<Article> findArticlesByOwner(String owner) {
         SearchQuery searchQuery = new NativeSearchQueryBuilder()

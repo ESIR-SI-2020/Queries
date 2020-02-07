@@ -34,6 +34,6 @@ public interface ArticleService {
      * Find all articles
      * @return a list of all articles
      */
-    Page<ArticleConsultationDTO> getAllArticles(Pageable page);
+    List<ArticleConsultationDTO> getAllArticles();
 
 }

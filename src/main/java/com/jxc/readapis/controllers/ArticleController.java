@@ -32,10 +32,10 @@ public class ArticleController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping()
-    public ResponseEntity<Page<ArticleConsultationDTO>> getAllArticles(@PageableDefault(size = 20) final Pageable page){
-        Page<ArticleConsultationDTO> articlePage = this.articleService.getAllArticles(page);
-        if(articlePage.hasContent()){
-          return new ResponseEntity<>(articlePage,HttpStatus.OK);
+    public ResponseEntity<List<ArticleConsultationDTO>> getAllArticles(@PageableDefault(size = 20) final Pageable page){
+        Optional<List<ArticleConsultationDTO>> articlePage = Optional.of(this.articleService.getAllArticles());
+        if(articlePage.isPresent()){
+          return new ResponseEntity<>(articlePage.get(),HttpStatus.OK);
         } else {
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -48,18 +48,19 @@ public class ArticleController {
         if(articleDto.isPresent()) return new ResponseEntity<>(articleDto.get(), HttpStatus.OK);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    
+
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/{owner}")
     public ResponseEntity<List<ArticleConsultationDTO>> getArticlesByOwner(@PathVariable String owner){
         List<ArticleConsultationDTO> articles = this.articleService.getArticlesByOwner(owner);
         if(articles.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return  new ResponseEntity<>(articles, HttpStatus.OK);
+    }
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping()
     public ResponseEntity<ArticleConsultationDTO> postArticle(Article article){
-      Optional<ArticleConsultationDTO> optPresent = Optional.of(this.articleService.getArticleByUrl(article.getUrl()));
+      Optional<ArticleConsultationDTO> optPresent = this.articleService.getArticleById(article.getId());
       if(!optPresent.isPresent()){
         Optional<ArticleConsultationDTO> optArticle = Optional.of(this.articleService.save(article));
         return new ResponseEntity<>(optArticle.get(),HttpStatus.OK);

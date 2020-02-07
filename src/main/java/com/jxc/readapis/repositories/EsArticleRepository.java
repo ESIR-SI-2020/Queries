@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface EsArticleRepository {
 
+    Article save(Article article);
     List<Article> findAll();
     Article findArticleById(String articleId);
     List<Article> findArticlesByOwner(String articleId);
