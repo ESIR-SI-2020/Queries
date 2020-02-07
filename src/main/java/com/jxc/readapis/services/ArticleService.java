@@ -4,6 +4,7 @@ import com.jxc.readapis.dto.ArticleConsultationDTO;
 
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ArticleService {
 
@@ -12,14 +13,14 @@ public interface ArticleService {
      * @param id
      * @return the article {@link Article} if it exits, throw an ArticleNtFoundException otherwise
      */
-    ArticleConsultationDTO getArticleById(String id);
+    Optional<ArticleConsultationDTO> getArticleById(String id);
 
     /**
-     * Method to find the owner of an article
-     * @param id the url of the article
-     * @return the name of the owner of the article if the article exsts, throw an ArticleNtFoundException otherwise
+     * Method to find all the articles of a user
+     * @param owner of the articles
+     * @return the name of the owner of the article if the article exists, throw an ArticleNtFoundException otherwise
      */
-    String getArticleOwner(String id);
+    List<ArticleConsultationDTO> getArticlesByOwner(String owner);
 
     /**
      * Find all articles
