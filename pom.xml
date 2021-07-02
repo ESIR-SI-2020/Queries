@@ -17,7 +17,7 @@
         <java.version>1.8</java.version>
         <lombok.version>1.18.10</lombok.version>
         <spring-elasticsearch.version>3.0.8.RELEASE</spring-elasticsearch.version>
-        <elasticsearch.version>5.6.0</elasticsearch.version>
+        <elasticsearch.version>6.8.15</elasticsearch.version>
         <graphql-spring-boot-starter.version>5.0.2</graphql-spring-boot-starter.version>
         <graphql-java-tools.version>5.2.4</graphql-java-tools.version>
         <graphiql.version>5.0.2</graphiql.version>
